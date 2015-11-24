@@ -26,7 +26,7 @@ class GoodsCategorySearch extends GoodsCategory
     {
         return [
             [['id', 'parent_id', 'sort', 'created_at', 'created_by', 'updated_at', 'updated_by', 'status'], 'integer'],
-            [['name', 'ico', 'remark', 'created_person'], 'safe'],
+            [['name', 'ico_path', 'remark', 'created_person'], 'safe'],
         ];
     }
 
@@ -61,7 +61,7 @@ class GoodsCategorySearch extends GoodsCategory
             'attributes' => [
                 'parent_id',
                 'name',
-                'ico',
+                'ico_path',
                 'sort',
                 'created_at',
                 'created_by',
@@ -94,7 +94,7 @@ class GoodsCategorySearch extends GoodsCategory
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'ico', $this->ico])
+            ->andFilterWhere(['like', 'ico_path', $this->ico_path])
             ->andFilterWhere(['like', 'remark', $this->remark]);
         $query->andFilterWhere(['like', User::tableName().'.username', $this->created_person]);
 

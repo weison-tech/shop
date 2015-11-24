@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="goods-category-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -29,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'parent_id',
             'name',
             [
-                'attribute' => 'ico',
+                'attribute' => 'ico_path',
                 'content'=>function($model){
                     return Html::img($model->ico_base_url."/".$model->ico_path,['style'=>'width:100px;height:100px;']);
                 },
@@ -42,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             [
-                'attribute'=>'create_person',
+                'attribute'=>'created_person',
                 'value' => 'creator.username',
             ],
 

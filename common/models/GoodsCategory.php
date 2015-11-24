@@ -88,7 +88,7 @@ class GoodsCategory extends \yii\db\ActiveRecord
             'id' => Yii::t('model-goods-category', 'ID'),
             'parent_id' => Yii::t('model-goods-category', 'Parent ID'),
             'name' => Yii::t('model-goods-category', 'Name'),
-            'ico' => Yii::t('model-goods-category', 'Ico'),
+            'ico_path' => Yii::t('model-goods-category', 'Ico'),
             'sort' => Yii::t('model-goods-category', 'Sort'),
             'remark' => Yii::t('model-goods-category', 'Remark'),
             'created_at' => Yii::t('model-goods-category', 'Create At'),
@@ -96,8 +96,17 @@ class GoodsCategory extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('model-goods-category', 'Update At'),
             'updated_by' => Yii::t('model-goods-category', 'Update By'),
             'status' => Yii::t('model-goods-category', 'Status'),
-            'create_person' => Yii::t('model-goods-category', 'Create Person'),
+            'created_person' => Yii::t('model-goods-category', 'Create Person'),
         ];
+    }
+
+    /**
+     * 获取父分类
+     * @return ActiveRecord 修改人表记录
+     */
+    public function getParent()
+    {
+        return $this->hasOne(self::className(), ['id' => 'parent_id']);
     }
 
 
