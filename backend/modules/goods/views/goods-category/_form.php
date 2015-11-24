@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\GoodsCategory;
+use trntv\filekit\widget\Upload;
 /* @var $this yii\web\View */
 /* @var $model common\models\GoodsCategory */
 /* @var $form yii\widgets\ActiveForm */
@@ -16,7 +17,14 @@ use common\models\GoodsCategory;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'ico')->textInput(['maxlength' => true]) ?>
+    <?php
+        echo $form->field($model, 'ico')->widget(
+        Upload::className(),
+        [
+            'url' => ['upload'],
+            'maxFileSize' => 5000000, // 5 MiB
+        ]);
+    ?>
 
     <?= $form->field($model, 'sort')->textInput() ?>
 

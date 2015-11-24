@@ -27,6 +27,29 @@ class GoodsCategoryController extends Controller
     }
 
     /**
+     * @inheritdoc
+     */
+    public function actions()
+    {
+        return [
+            'upload' => [
+                'class' => 'trntv\filekit\actions\UploadAction',
+                'deleteRoute' => 'upload-delete'
+            ],
+            'upload-delete' => [
+                'class' => 'trntv\filekit\actions\DeleteAction'
+            ],
+            'upload-imperavi' => [
+                'class' => 'trntv\filekit\actions\UploadAction',
+                'fileparam' => 'file',
+                'responseUrlParam'=> 'filelink',
+                'multiple' => false,
+                'disableCsrf' => true
+            ],
+        ];
+    }
+
+    /**
      * Lists all GoodsCategory models.
      * @return mixed
      */
@@ -62,15 +85,10 @@ class GoodsCategoryController extends Controller
     {
         $model = new GoodsCategory();
 
-        $params = Yii::$app->request->post();
-        if(count($params)){
-            $model->load($params);
-            $model->create_at = time();
-            $model->create_by = Yii::$app->user->id;
-            if($model->save()){
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
+            print_r($model->errors);
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -86,14 +104,8 @@ class GoodsCategoryController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $params = Yii::$app->request->post();
-        if(count($params)){
-            $model->load($params);
-            $model->update_at = time();
-            $model->update_by = Yii::$app->user->id;
-            if($model->save()){
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }else{
             return $this->render('update', [
                 'model' => $model,
@@ -111,8 +123,8 @@ class GoodsCategoryController extends Controller
     {
         $model = $this->findModel($id);
         $model->status = GoodsCategory::STATUS_DELETED;
-        $model->update_by = Yii::$app->user->id;
-        $model->update_at = time();
+        $model->updated_by = Yii::$app->user->id;
+        $model->updated_at = time();
         $model->save();
 
         return $this->redirect(['index']);

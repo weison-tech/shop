@@ -31,23 +31,27 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'parent_id',
             'name',
-            'ico',
+            [
+                'attribute'=>'ico',
+                'value'=>$model->ico_base_url."/".$model->ico_path,
+                'format' => ['image',['width'=>'100','height'=>'100']],
+            ],
             'sort',
             'remark',
             [
-                'attribute'=>'create_at',
-                'value'=>date("Y-m-d H:i:s",$model->create_at),
+                'attribute'=>'created_at',
+                'value'=>date("Y-m-d H:i:s",$model->created_at),
             ],
             [
-                'attribute'=>'create_by',
+                'attribute'=>'created_by',
                 'value'=>$model->creator ? $model->creator->username : "未设置" ,
             ],
             [
-                'attribute'=>'update_at',
-                'value'=>date("Y-m-d H:i:s",$model->update_at),
+                'attribute'=>'updated_at',
+                'value'=>date("Y-m-d H:i:s",$model->updated_at),
             ],
             [
-                'attribute'=>'update_by',
+                'attribute'=>'updated_by',
                 'value'=>$model->updator ? $model->updator->username : "未设置" ,
             ],
             [

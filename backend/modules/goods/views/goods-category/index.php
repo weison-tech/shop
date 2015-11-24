@@ -26,34 +26,26 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            // 'id',
             'parent_id',
             'name',
-            'ico',
-            'sort',
-            // 'remark',
             [
-                'attribute' => 'create_at',
+                'attribute' => 'ico',
+                'content'=>function($model){
+                    return Html::img($model->ico_base_url."/".$model->ico_path,['style'=>'width:100px;height:100px;']);
+                },
+            ],
+            'sort',
+            [
+                'attribute' => 'created_at',
                 'value'=>function($model){
-                    return date("Y-m-d H:i:s",$model->create_at);
+                    return date("Y-m-d H:i:s",$model->created_at);
                 },
             ],
             [
                 'attribute'=>'create_person',
                 'value' => 'creator.username',
             ],
-            // [
-            //     'attribute' => 'update_at',
-            //     'value'=>function($model){
-            //         return date("Y-m-d H:i:s",$model->update_at);
-            //     },
-            // ],
-            // [
-            //     'attribute'=>'update_by',
-            //     'value'=>function($model){
-            //         return $model->updator ? $model->updator->username : "未设置" ;
-            //     },
-            // ],
+
             [
                 'attribute' => 'status',
                 'value'=>function($model){

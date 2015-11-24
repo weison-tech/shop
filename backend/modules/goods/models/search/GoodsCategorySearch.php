@@ -15,9 +15,9 @@ class GoodsCategorySearch extends GoodsCategory
 {
     /**
      * 存放搜索时的用户名
-     * @var $create_person 创建人
+     * @var $created_person 创建人
      */
-    public $create_person;
+    public $created_person;
 
     /**
      * @inheritdoc
@@ -25,8 +25,8 @@ class GoodsCategorySearch extends GoodsCategory
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'sort', 'create_at', 'create_by', 'update_at', 'update_by', 'status'], 'integer'],
-            [['name', 'ico', 'remark', 'create_person'], 'safe'],
+            [['id', 'parent_id', 'sort', 'created_at', 'created_by', 'updated_at', 'updated_by', 'status'], 'integer'],
+            [['name', 'ico', 'remark', 'created_person'], 'safe'],
         ];
     }
 
@@ -63,11 +63,10 @@ class GoodsCategorySearch extends GoodsCategory
                 'name',
                 'ico',
                 'sort',
-                'create_at',
-                'create_by',
-                'update_at',
+                'created_at',
+                'created_by',
                 'status',
-                'create_person' => [
+                'created_person' => [
                     'asc' => [User::tableName().'.username' => SORT_ASC],
                     'desc' => [User::tableName().'.username' => SORT_DESC],
                 ],
@@ -87,17 +86,17 @@ class GoodsCategorySearch extends GoodsCategory
             'id' => $this->id,
             'parent_id' => $this->parent_id,
             'sort' => $this->sort,
-            'create_at' => $this->create_at,
-            'create_by' => $this->create_by,
-            'update_at' => $this->update_at,
-            'update_by' => $this->update_by,
+            'created_at' => $this->created_at,
+            'created_by' => $this->created_by,
+            'updated_at' => $this->updated_at,
+            'updated_by' => $this->updated_by,
             'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'ico', $this->ico])
             ->andFilterWhere(['like', 'remark', $this->remark]);
-        $query->andFilterWhere(['like', User::tableName().'.username', $this->create_person]);
+        $query->andFilterWhere(['like', User::tableName().'.username', $this->created_person]);
 
         return $dataProvider;
     }

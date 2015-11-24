@@ -3,6 +3,9 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
+use trntv\filekit\behaviors\UploadBehavior;
 
 /**
  * This is the model class for table "ms_goods_category".
@@ -13,10 +16,10 @@ use Yii;
  * @property string $ico
  * @property integer $sort
  * @property string $remark
- * @property integer $create_at
- * @property integer $create_by
- * @property integer $update_at
- * @property integer $update_by
+ * @property integer $created_at
+ * @property integer $created_by
+ * @property integer $updated_at
+ * @property integer $updated_by
  * @property integer $status
  */
 class GoodsCategory extends \yii\db\ActiveRecord
@@ -28,6 +31,8 @@ class GoodsCategory extends \yii\db\ActiveRecord
     const STATUS_ENABLED = 1; //有效
     const STATUS_DELETED = -1; //删除
     const STATUS_DISABLED = 0; //无效
+
+    public $ico;
 
     /**
      * @inheritdoc
@@ -43,10 +48,34 @@ class GoodsCategory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'sort', 'create_at', 'create_by', 'update_at', 'update_by', 'status'], 'integer'],
-            [['name', 'create_at', 'create_by'], 'required'],
+            [['parent_id', 'sort', 'created_at', 'created_by', 'updated_at', 'updated_by', 'status'], 'integer'],
+            [['name'], 'required'],
             [['name'], 'string', 'max' => 50],
-            [['ico', 'remark'], 'string', 'max' => 255],
+            [['ico_path', 'ico_base_url', 'remark'], 'string', 'max' => 255],
+            [['ico'], 'safe'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            [
+                'class'=>BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+
+            ],
+
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'ico',
+                'pathAttribute' => 'ico_path',
+                'baseUrlAttribute' => 'ico_base_url'
+            ]
         ];
     }
 
@@ -62,11 +91,12 @@ class GoodsCategory extends \yii\db\ActiveRecord
             'ico' => Yii::t('model-goods-category', 'Ico'),
             'sort' => Yii::t('model-goods-category', 'Sort'),
             'remark' => Yii::t('model-goods-category', 'Remark'),
-            'create_at' => Yii::t('model-goods-category', 'Create At'),
-            'create_by' => Yii::t('model-goods-category', 'Create By'),
-            'update_at' => Yii::t('model-goods-category', 'Update At'),
-            'update_by' => Yii::t('model-goods-category', 'Update By'),
+            'created_at' => Yii::t('model-goods-category', 'Create At'),
+            'created_by' => Yii::t('model-goods-category', 'Create By'),
+            'updated_at' => Yii::t('model-goods-category', 'Update At'),
+            'updated_by' => Yii::t('model-goods-category', 'Update By'),
             'status' => Yii::t('model-goods-category', 'Status'),
+            'create_person' => Yii::t('model-goods-category', 'Create Person'),
         ];
     }
 
@@ -77,7 +107,7 @@ class GoodsCategory extends \yii\db\ActiveRecord
      */
     public function getUpdator()
     {
-        return $this->hasOne(User::className(), ['id' => 'update_by']);
+        return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
 
     /**
@@ -86,7 +116,7 @@ class GoodsCategory extends \yii\db\ActiveRecord
      */
     public function getCreator()
     {
-        return $this->hasOne(User::className(), ['id' => 'create_by']);
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
     }
 
 
