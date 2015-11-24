@@ -89,6 +89,7 @@ class GoodsCategory extends \yii\db\ActiveRecord
             'parent_id' => Yii::t('model-goods-category', 'Parent ID'),
             'name' => Yii::t('model-goods-category', 'Name'),
             'ico_path' => Yii::t('model-goods-category', 'Ico'),
+            'ico' => Yii::t('model-goods-category', 'Ico'),
             'sort' => Yii::t('model-goods-category', 'Sort'),
             'remark' => Yii::t('model-goods-category', 'Remark'),
             'created_at' => Yii::t('model-goods-category', 'Create At'),
