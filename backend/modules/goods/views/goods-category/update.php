@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $model common\models\GoodsCategory */
 
 $this->title = Yii::t('goods-category','Update Goods Category: ') . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Goods Categories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('goods-category','Goods Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('goods-category','Update');
 ?>
 <div class="goods-category-update">
 

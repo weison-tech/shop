@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\GoodsCategory;
+use common\models\User;
 
 /**
  * GoodsCategorySearch represents the model behind the search form about `common\models\GoodsCategory`.
@@ -13,13 +14,19 @@ use common\models\GoodsCategory;
 class GoodsCategorySearch extends GoodsCategory
 {
     /**
+     * 存放搜索时的用户名
+     * @var $create_person 创建人
+     */
+    public $create_person;
+
+    /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
             [['id', 'parent_id', 'sort', 'create_at', 'create_by', 'update_at', 'update_by', 'status'], 'integer'],
-            [['name', 'ico', 'remark'], 'safe'],
+            [['name', 'ico', 'remark', 'create_person'], 'safe'],
         ];
     }
 
@@ -41,12 +48,30 @@ class GoodsCategorySearch extends GoodsCategory
      */
     public function search($params)
     {
-        $query = GoodsCategory::find();
+        $query = GoodsCategory::find()->where(['<>','status',GoodsCategory::STATUS_DELETED])
+                ->joinWith(['creator']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+        ]);
+
+        $dataProvider->setSort([
+            'attributes' => [
+                'parent_id',
+                'name',
+                'ico',
+                'sort',
+                'create_at',
+                'create_by',
+                'update_at',
+                'status',
+                'create_person' => [
+                    'asc' => [User::tableName().'.username' => SORT_ASC],
+                    'desc' => [User::tableName().'.username' => SORT_DESC],
+                ],
+            ]
         ]);
 
         $this->load($params);
@@ -72,6 +97,7 @@ class GoodsCategorySearch extends GoodsCategory
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'ico', $this->ico])
             ->andFilterWhere(['like', 'remark', $this->remark]);
+        $query->andFilterWhere(['like', User::tableName().'.username', $this->create_person]);
 
         return $dataProvider;
     }

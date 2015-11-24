@@ -109,7 +109,11 @@ class GoodsCategoryController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->status = GoodsCategory::STATUS_DELETED;
+        $model->update_by = Yii::$app->user->id;
+        $model->update_at = time();
+        $model->save();
 
         return $this->redirect(['index']);
     }
@@ -128,5 +132,14 @@ class GoodsCategoryController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     *获取父级分类的选择树
+     * @return [type] [description]
+     */
+    public function getSelectTree()
+    {
+        $cats = GoodsCategory::find()->where(['status'=>GoodsCategory::STATUS_ENABLED])->all();
     }
 }

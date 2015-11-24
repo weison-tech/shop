@@ -23,4 +23,5 @@ return [
     'Create' => '创建',
     'Update' => '修改',
     'Update Goods Category: ' => '修改分类:',
+    'Delete' => '修改',
 ];

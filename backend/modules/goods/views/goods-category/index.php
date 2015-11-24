@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\GoodsCategory;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\goods\models\search\GoodsCategorySearch */
@@ -25,17 +26,41 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            // 'id',
             'parent_id',
             'name',
             'ico',
             'sort',
             // 'remark',
-            // 'create_at',
-            // 'create_by',
-            // 'update_at',
-            // 'update_by',
-            // 'status',
+            [
+                'attribute' => 'create_at',
+                'value'=>function($model){
+                    return date("Y-m-d H:i:s",$model->create_at);
+                },
+            ],
+            [
+                'attribute'=>'create_person',
+                'value' => 'creator.username',
+            ],
+            // [
+            //     'attribute' => 'update_at',
+            //     'value'=>function($model){
+            //         return date("Y-m-d H:i:s",$model->update_at);
+            //     },
+            // ],
+            // [
+            //     'attribute'=>'update_by',
+            //     'value'=>function($model){
+            //         return $model->updator ? $model->updator->username : "未设置" ;
+            //     },
+            // ],
+            [
+                'attribute' => 'status',
+                'value'=>function($model){
+                    return GoodsCategory::getStatusText($model->status);
+                },
+                'filter' => GoodsCategory::getStatusArr(),
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

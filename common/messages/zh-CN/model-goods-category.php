@@ -27,4 +27,7 @@ return [
     'Update At' => '修改时间',
     'Update By' => '修改人',
     'Status' => '状态',
+    'Disabled' => '失效',
+    'Enabled' => '有效',
+    'Deleted' => '删除',
 ];
