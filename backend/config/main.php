@@ -8,10 +8,10 @@ $params = array_merge(
 
 return [
     'id' => 'app-backend',
-    'name' => 'IT自学分享网管理后台',
+    'name' => '商城管理后台',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log','rbac'],
     'modules' => [
         'user' => [
             // following line will restrict access to admin page
@@ -22,6 +22,12 @@ return [
         ],
         'system' => [
             'class' => 'backend\modules\system\Module',
+        ],
+        'rbac' => [
+            'class' => 'mdm\admin\Module',
+        ],
+        'goods' => [
+            'class' => 'backend\modules\goods\Module',
         ],
     ],
     'components' => [
@@ -37,9 +43,25 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'authManager' => [
+            'class'=> 'yii\rbac\DbManager',
+        ],
     ],
     'params' => $params,
     'as layoutFilter' => [
         'class' => 'backend\behaviors\LayoutBehavior',
+    ],
+    //rbac 权限控制
+    'as access' => [
+        'class' => 'mdm\admin\classes\AccessControl',
+        'allowActions' => [
+            'site/*',
+            'rbac/*',
+            // The actions listed here will be allowed to everyone including guests.
+            // So, 'admin/*' should not appear here in the production, of course.
+            // But in the earlier stages of your development, you may probably want to
+            // add a lot of actions here until you finally completed setting up rbac,
+            // otherwise you may not even take a first step.
+        ]
     ],
 ];

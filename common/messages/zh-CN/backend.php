@@ -83,7 +83,10 @@ return [
 	'Update Article Category: ' => '修改文章分类：',
 	'Error #{id}' => '错误 #{id}',
 	'Delete' => '删除',
-	'IT We Share Admin' => 'IT自学网管理后台',
+	'Shop Admin' => '商城管理后台',
 	'Main' => '控制面板',
 	'Published Time ...' => '发布时间...',
+	'RBAC Management' => '权限管理',
+	'Goods Management' => '商品管理',
+	'Category Management' => '分类管理',
 ];

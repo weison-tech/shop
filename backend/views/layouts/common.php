@@ -18,7 +18,7 @@ $bundle = BackendAsset::register($this);
         <header class="main-header">
             <a href="<?=Url::to(['/site/index'])?>" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                <?php echo Yii::t('backend','IT We Share Admin') ?>
+                <?php echo Yii::t('backend','Shop Admin') ?>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -140,6 +140,15 @@ $bundle = BackendAsset::register($this);
                             'badgeBgClass'=>'label-success',
                         ],
                         [
+                            'label'=>Yii::t('backend', 'Goods Management'),
+                            'url' => '#',
+                            'icon'=>'<i class="fa fa-bank"></i>',
+                            'options'=>['class'=>'treeview'],
+                            'items'=>[
+                                ['label'=>Yii::t('backend', 'Category Management'), 'url'=>['/goods/goods-category/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                            ]
+                        ],
+                        [
                             'label'=>Yii::t('backend', 'Content'),
                             'url' => '#',
                             'icon'=>'<i class="fa fa-edit"></i>',
@@ -157,6 +166,7 @@ $bundle = BackendAsset::register($this);
                             'items'=>[
                                 ['label'=>Yii::t('backend', 'User Management'), 'url'=>['/user/admin/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                                 ['label'=>Yii::t('backend', 'Create User'), 'url'=>['/user/admin/create'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>Yii::t('backend', 'RBAC Management'), 'url'=>['/rbac'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                             ]
                         ],
                         [
