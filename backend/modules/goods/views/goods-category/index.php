@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
 use common\models\GoodsCategory;
 
@@ -25,7 +26,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'parent_id',
+            [
+                'attribute' => 'parent_id',
+                'value'=>function ($model) {
+                    return $model->parent->name;
+                },
+                'filter' => Html::activeDropDownList(
+                    $searchModel,
+                    'parent_id',
+                    ArrayHelper::map(GoodsCategory::get(0, GoodsCategory::find()->asArray()->all()), 'id', 'label'),
+                    ['class' => 'form-control', 'prompt' => Yii::t('goods-category', 'Please Filter')]
+                ),
+            ],
             'name',
             [
                 'attribute' => 'ico_path',

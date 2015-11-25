@@ -161,4 +161,41 @@ class GoodsCategory extends \yii\db\ActiveRecord
         }
         return $text;
     }
+
+    /**
+     * Get all catalog order by parent/child with the space before child label
+     * Usage: ArrayHelper::map(GoodsCatalog::get(0, GoodsCatalog::find()->asArray()->all()), 'id', 'label')
+     * @param int $parentId  parent catalog id
+     * @param array $array  catalog array list
+     * @param int $level  catalog level, will affect $repeat
+     * @param int $add  times of $repeat
+     * @param string $repeat  symbols or spaces to be added for sub catalog
+     * @return array  catalog collections
+     */
+    static public function get($parentId = 0, $array = [], $level = 0, $add = 2, $repeat = '　')
+    {
+        $strRepeat = '';
+        // add some spaces or symbols for non top level categories
+        if ($level > 1) {
+            for ($j = 0; $j < $level; $j++) {
+                $strRepeat .= $repeat;
+            }
+        }
+
+        $newArray = array ();
+        //performance is not very good here
+        foreach ((array)$array as $v) {
+            if ($v['parent_id'] == $parentId) {
+                $item = (array)$v;
+                $item['label'] = $strRepeat . (isset($v['title']) ? $v['title'] : $v['name']);
+                $newArray[] = $item;
+
+                $tempArray = self::get($v['id'], $array, ($level + $add), $add, $repeat);
+                if ($tempArray) {
+                    $newArray = array_merge($newArray, $tempArray);
+                }
+            }
+        }
+        return $newArray;
+    }
 }

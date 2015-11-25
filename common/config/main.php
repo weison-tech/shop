@@ -82,7 +82,7 @@ return [
 
         'fileStorage' => [
             'class' => '\trntv\filekit\Storage',
-            'baseUrl' => 'http://storage.itweshare.com/uploads',
+            'baseUrl' => 'http://lstorage.itweshare.com/uploads',
             'filesystem' => [
                 'class' => 'common\components\filesystem\LocalFlysystemBuilder',
                 'path' => '@storage/uploads'
