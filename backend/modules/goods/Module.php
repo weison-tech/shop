@@ -20,6 +20,7 @@ class Module extends \yii\base\Module
             'basePath' => __DIR__ . '/messages',
             'fileMap' => [
                 'goods-category' => 'goods-category.php',
+                'goods-brand' => 'goods-brand.php',
             ],
         ];
 	}

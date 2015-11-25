@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Message translations.
  *
@@ -17,16 +18,11 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-	'Category ID' => '所属分类',
-    'Name' => '品牌名',
-    'Logo' => '品牌LOGO',
-    'Logo Base Url' => '',
-    'Sort' => '排序',
-    'Description' => '描述',
-    'Status' => '状态',
-    'Created At' => '创建时间',
-    'Created By' => '创建人',
-    'Updated At' => '修改时间',
-    'Updated By' => '修改人',
-    'Category Search' => '所属分类',
+    'Goods Brands' => '商品品牌管理',
+    'Create Goods Brand' => '添加品牌',
+    'Create' => '创建',
+    'Update' => '修改',
+    'Update Goods Brand: ' => '修改品牌:',
+    'Delete' => '删除',
+    'Please Filter' => '请选择',
 ];

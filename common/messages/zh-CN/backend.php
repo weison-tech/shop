@@ -89,4 +89,5 @@ return [
 	'RBAC Management' => '权限管理',
 	'Goods Management' => '商品管理',
 	'Category Management' => '分类管理',
+	'Brand Management' => '品牌管理',
 ];

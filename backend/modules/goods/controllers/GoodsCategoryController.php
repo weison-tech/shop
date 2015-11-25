@@ -122,8 +122,6 @@ class GoodsCategoryController extends Controller
     {
         $model = $this->findModel($id);
         $model->status = GoodsCategory::STATUS_DELETED;
-        $model->updated_by = Yii::$app->user->id;
-        $model->updated_at = time();
         $model->save();
 
         return $this->redirect(['index']);

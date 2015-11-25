@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\GoodsBrand;
+use common\models\GoodsCategory;
 
 /**
  * GoodsBrandSearch represents the model behind the search form about `common\models\GoodsBrand`.
@@ -13,13 +14,19 @@ use common\models\GoodsBrand;
 class GoodsBrandSearch extends GoodsBrand
 {
     /**
+     * 存放搜索时的分类名
+     * @var $category_search 商品分类
+     */
+    public $category_search;
+
+    /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
             [['id', 'category_id', 'sort', 'status', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
-            [['name', 'logo', 'description'], 'safe'],
+            [['name', 'logo_path', 'description', 'category_search'], 'safe'],
         ];
     }
 
@@ -41,12 +48,33 @@ class GoodsBrandSearch extends GoodsBrand
      */
     public function search($params)
     {
-        $query = GoodsBrand::find();
-
+        $query = GoodsBrand::find()->where(['<>',GoodsBrand::tableName().'.status',GoodsBrand::STATUS_DELETED])
+                ->joinWith(['category']);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+        ]);
+
+        $dataProvider->setSort([
+            'attributes' => [
+                'id',
+                'name',
+                'logo',
+                'logo_path',
+                'logo_base_url',
+                'sort',
+                'description',
+                'status',
+                'created_at',
+                'created_by',
+                'updated_at',
+                'updated_by',
+                'category_search' => [
+                    'asc' => [GoodsCategory::tableName().'.name' => SORT_ASC],
+                    'desc' => [GoodsCategory::tableName().'.name' => SORT_DESC],
+                ],
+            ]
         ]);
 
         $this->load($params);
@@ -59,19 +87,20 @@ class GoodsBrandSearch extends GoodsBrand
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            self::tableName().'.id' => $this->id,
             'category_id' => $this->category_id,
-            'sort' => $this->sort,
-            'status' => $this->status,
+            self::tableName().'.sort' => $this->sort,
+            self::tableName().'.status' => $this->status,
             'created_at' => $this->created_at,
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'logo', $this->logo])
+        $query->andFilterWhere(['like', self::tableName().'.name', $this->name])
+            ->andFilterWhere(['like', 'logo_path', $this->logo_path])
             ->andFilterWhere(['like', 'description', $this->description]);
+        $query->andFilterWhere(['like', GoodsCategory::tableName().'.name', $this->category_search]);
 
         return $dataProvider;
     }

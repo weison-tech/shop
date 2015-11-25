@@ -3,6 +3,10 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
+use trntv\filekit\behaviors\UploadBehavior;
+use common\models\GoodsCategory;
 
 /**
  * This is the model class for table "ms_goods_brand".
@@ -28,6 +32,7 @@ class GoodsBrand extends \yii\db\ActiveRecord
     const STATUS_DELETED = 2; //删除
     const STATUS_DISABLED = 0; //无效
 
+    public $logo;
 
     /**
      * @inheritdoc
@@ -43,10 +48,34 @@ class GoodsBrand extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'name', 'updated_at', 'updated_by'], 'required'],
+            [['category_id', 'name'], 'required'],
             [['category_id', 'sort', 'status', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 20],
-            [['logo', 'description'], 'string', 'max' => 200],
+            [['logo_path','logo_base_url', 'description'], 'string', 'max' => 200],
+            [['logo'], 'safe'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            [
+                'class'=>BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+
+            ],
+
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'logo',
+                'pathAttribute' => 'logo_path',
+                'baseUrlAttribute' => 'logo_base_url'
+            ]
         ];
     }
 
@@ -56,17 +85,79 @@ class GoodsBrand extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('model-goods_brand', 'ID'),
-            'category_id' => Yii::t('model-goods_brand', 'Category ID'),
-            'name' => Yii::t('model-goods_brand', 'Name'),
-            'logo' => Yii::t('model-goods_brand', 'Logo'),
-            'sort' => Yii::t('model-goods_brand', 'Sort'),
-            'description' => Yii::t('model-goods_brand', 'Description'),
-            'status' => Yii::t('model-goods_brand', 'Status'),
-            'created_at' => Yii::t('model-goods_brand', 'Created At'),
-            'created_by' => Yii::t('model-goods_brand', 'Created By'),
-            'updated_at' => Yii::t('model-goods_brand', 'Updated At'),
-            'updated_by' => Yii::t('model-goods_brand', 'Updated By'),
+            'id' => Yii::t('model-goods-brand', 'ID'),
+            'category_id' => Yii::t('model-goods-brand', 'Category ID'),
+            'name' => Yii::t('model-goods-brand', 'Name'),
+            'logo' => Yii::t('model-goods-brand', 'Logo'),
+            'logo_path' => Yii::t('model-goods-brand', 'Logo'),
+            'logo_base_url' => Yii::t('model-goods-brand', 'Logo Base Url'),
+            'sort' => Yii::t('model-goods-brand', 'Sort'),
+            'description' => Yii::t('model-goods-brand', 'Description'),
+            'status' => Yii::t('model-goods-brand', 'Status'),
+            'created_at' => Yii::t('model-goods-brand', 'Created At'),
+            'created_by' => Yii::t('model-goods-brand', 'Created By'),
+            'updated_at' => Yii::t('model-goods-brand', 'Updated At'),
+            'updated_by' => Yii::t('model-goods-brand', 'Updated By'),
+            'category_search' => Yii::t('model-goods-brand', 'Category Search'),
         ];
+    }
+
+    /**
+     * 获取分类
+     * @return ActiveRecord 商品分类表记录
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(GoodsCategory::className(), ['id' => 'category_id']);
+    }
+
+    /**
+     * 获取修改人
+     * @return ActiveRecord 修改人表记录
+     */
+    public function getUpdator()
+    {
+        return $this->hasOne(User::className(), ['id' => 'updated_by']);
+    }
+
+    /**
+     * 获取创建人
+     * @return ActiveRecord 创建人表记录
+     */
+    public function getCreator()
+    {
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
+    }
+
+    /**
+     * 获取状态选择数组
+     * @return Array 状态数组
+     */
+    public static function getStatusArr()
+    {
+        return [
+            self::STATUS_ENABLED => Yii::t('model-goods-category','Enabled'),
+            self::STATUS_DISABLED => Yii::t('model-goods-category','Disabled'),
+            // self::STATUS_DELETED => Yii::t('model-goods-category','Deleted'),
+        ];
+    }
+
+
+    /**
+     * 根据状态码获取状态描述
+     * @param  Int $status 状态码
+     * @return String $text 状态描述文字
+     */
+    public static function getStatusText($status)
+    {
+        $text = '';
+        if($status == self::STATUS_ENABLED){
+            $text = Yii::t('model-goods-category','Enabled');
+        }else if($status == self::STATUS_DISABLED){
+            $text = Yii::t('model-goods-category','Disabled');
+        }else if($status == self::STATUS_DELETED){
+            $text = Yii::t('model-goods-category','Deleted');
+        }
+        return $text;
     }
 }

@@ -27,6 +27,29 @@ class GoodsBrandController extends Controller
     }
 
     /**
+     * @inheritdoc
+     */
+    public function actions()
+    {
+        return [
+            'upload' => [
+                'class' => 'trntv\filekit\actions\UploadAction',
+                'deleteRoute' => 'upload-delete'
+            ],
+            'upload-delete' => [
+                'class' => 'trntv\filekit\actions\DeleteAction'
+            ],
+            'upload-imperavi' => [
+                'class' => 'trntv\filekit\actions\UploadAction',
+                'fileparam' => 'file',
+                'responseUrlParam'=> 'filelink',
+                'multiple' => false,
+                'disableCsrf' => true
+            ],
+        ];
+    }
+
+    /**
      * Lists all GoodsBrand models.
      * @return mixed
      */
@@ -98,7 +121,9 @@ class GoodsBrandController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->status = GoodsBrand::STATUS_DELETED;
+        $model->save();
 
         return $this->redirect(['index']);
     }
