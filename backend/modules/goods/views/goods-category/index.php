@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'parent_id',
                 'value'=>function ($model) {
-                    return $model->parent->name;
+                    return $model->parent ? $model->parent->name : '-';
                 },
                 'filter' => Html::activeDropDownList(
                     $searchModel,
