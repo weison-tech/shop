@@ -29,7 +29,7 @@ class GoodsCategory extends \yii\db\ActiveRecord
      * 商品分类状态常量
      */
     const STATUS_ENABLED = 1; //有效
-    const STATUS_DELETED = -1; //删除
+    const STATUS_DELETED = 2; //删除
     const STATUS_DISABLED = 0; //无效
 
     public $ico;

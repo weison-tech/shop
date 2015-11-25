@@ -19,7 +19,7 @@ class m151123_161346_create_goods_category extends Migration
             'created_by' => 'INT(11) NOT NULL COMMENT "创建人"',
             'updated_at' => 'INT(11) NULL DEFAULT "0" COMMENT "修改时间"',
             'updated_by' => 'INT(11) NULL DEFAULT "0" COMMENT "修改人"',
-            'status' => 'TINYINT(1) NULL DEFAULT "0" COMMENT "状态（0未启用;1启用;-1删除）"',
+            'status' => 'TINYINT(1) NULL DEFAULT "0" COMMENT "状态 0不启用 1启用 2删除"',
         ], $this->tableOptions);
     }
 

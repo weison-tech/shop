@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => Html::activeDropDownList(
                     $searchModel,
                     'parent_id',
-                    ArrayHelper::map(GoodsCategory::get(0, GoodsCategory::find()->asArray()->all()), 'id', 'label'),
+                    ArrayHelper::map(GoodsCategory::get(0, GoodsCategory::find()->where(['status'=>GoodsCategory::STATUS_ENABLED])->asArray()->all()), 'id', 'label'),
                     ['class' => 'form-control', 'prompt' => Yii::t('goods-category', 'Please Filter')]
                 ),
             ],

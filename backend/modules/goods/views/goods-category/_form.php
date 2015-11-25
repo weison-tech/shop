@@ -14,7 +14,7 @@ use trntv\filekit\widget\Upload;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'parent_id')->dropDownList(ArrayHelper::map(GoodsCategory::get(0, GoodsCategory::find()->asArray()->all()), 'id', 'label'),['class' => 'form-control', 'prompt' => Yii::t('goods-category', 'Please Filter')]) ?>
+    <?= $form->field($model, 'parent_id')->dropDownList(ArrayHelper::map(GoodsCategory::get(0, GoodsCategory::find()->where(['status'=>GoodsCategory::STATUS_ENABLED])->asArray()->all()), 'id', 'label'),['class' => 'form-control', 'prompt' => Yii::t('goods-category', 'Please Filter')]) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
