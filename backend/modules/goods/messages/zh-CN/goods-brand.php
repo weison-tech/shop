@@ -25,4 +25,5 @@ return [
     'Update Goods Brand: ' => '修改品牌:',
     'Delete' => '删除',
     'Please Filter' => '请选择',
+    'Batch Delete' => '批量删除',
 ];

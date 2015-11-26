@@ -25,4 +25,5 @@ return [
     'Update Goods Category: ' => '修改分类:',
     'Delete' => '删除',
     'Please Filter' => '请选择',
+    'Batch Delete' => '批量删除',
 ];
