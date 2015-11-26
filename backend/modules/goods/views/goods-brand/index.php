@@ -19,13 +19,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('goods-brand', 'Create Goods Brand'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('goods-brand', 'Batch Delete'), 'javascript:void(0);', ['class' => 'btn btn-danger', 'id' => 'batchDelete']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'yii\grid\CheckboxColumn'],
 
             'id',
             [
@@ -64,3 +65,20 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 </div>
+
+<?php
+$urlBatchDelete = \yii\helpers\Url::to(['/goods/goods-brand/batch-delete']);
+$js = <<<JS
+jQuery(document).ready(function() {
+    $("#batchDelete").click(function() {
+        var keys = $("#w0").yiiGridView("getSelectedRows");
+        $.ajax({
+            type: "POST",
+            url: "{$urlBatchDelete}",
+            dataType: "json",
+            data: {ids: keys}
+        });
+    });
+});
+JS;
+$this->registerJs($js, \yii\web\View::POS_END);
