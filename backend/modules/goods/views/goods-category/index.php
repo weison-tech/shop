@@ -81,7 +81,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     Html::a(Yii::t('common','Update'), $updateUrl, ['title' => Yii::t('common','Update'),'class'=>'btn btn-sm btn-primary']).
                     Html::a(Yii::t('common','Delete'), $deleteUrl, ['title' => Yii::t('common','Delete'),'class'=>'btn btn-sm btn-danger','data-method'=>'post', 'data-confirm'=>Yii::t('common','Are you sure to delete ?')]).
                     "</div>";
-                }
+                },
+                'options' => ['style' => 'width:175px;'],
             ]
         ],
     ]); ?>
