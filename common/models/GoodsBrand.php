@@ -48,10 +48,11 @@ class GoodsBrand extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'name'], 'required'],
+            [['category_id', 'name', 'logo', 'sort'], 'required'],
             [['category_id', 'sort', 'status', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
-            [['name'], 'string', 'max' => 20],
-            [['logo_path','logo_base_url', 'description'], 'string', 'max' => 200],
+            [['name'], 'string', 'max' => 32],
+            [['logo_path','logo_base_url'], 'string', 'max' => 128],
+            [['description'], 'string', 'max' => 255],
             [['logo'], 'safe'],
         ];
     }

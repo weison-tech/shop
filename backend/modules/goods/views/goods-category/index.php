@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'ico_path',
                 'content'=>function($model){
-                    return Html::img($model->ico_base_url."/".$model->ico_path,['style'=>'width:100px;height:100px;']);
+                    return $model->ico_path ? Html::img($model->ico_base_url."/".$model->ico_path,['style'=>'width:100px;height:100px;']) : '-';
                 },
             ],
             'sort',

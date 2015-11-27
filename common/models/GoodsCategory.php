@@ -49,9 +49,9 @@ class GoodsCategory extends \yii\db\ActiveRecord
     {
         return [
             [['parent_id', 'sort', 'created_at', 'created_by', 'updated_at', 'updated_by', 'status'], 'integer'],
-            [['name'], 'required'],
-            [['name'], 'string', 'max' => 50],
-            [['ico_path', 'ico_base_url', 'remark'], 'string', 'max' => 255],
+            [['name','sort'], 'required'],
+            [['name'], 'string', 'max' => 64],
+            [['ico_path', 'ico_base_url', 'remark'], 'string', 'max' => 128],
             [['ico'], 'safe'],
         ];
     }
