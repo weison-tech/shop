@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
 use common\models\GoodsCategory;
@@ -60,7 +61,21 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updated_at',
             // 'updated_by',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            // ['class' => 'yii\grid\ActionColumn'],
+            [
+                'label'=>Yii::t('common','Operation'),
+                'format'=>'raw',
+                'value' => function($data){
+                    $viewUrl = Url::to(['view?id='.$data->id]);
+                    $updateUrl = Url::to(['update?id='.$data->id]);
+                    $deleteUrl = Url::to(['delete?id='.$data->id]);
+                    return "<div class='btn-group'>".
+                    Html::a(Yii::t('common','View'), $viewUrl, ['title' => Yii::t('common','View'),'class'=>'btn btn-sm btn-info']).
+                    Html::a(Yii::t('common','Update'), $updateUrl, ['title' => Yii::t('common','Update'),'class'=>'btn btn-sm btn-primary']).
+                    Html::a(Yii::t('common','Delete'), $deleteUrl, ['title' => Yii::t('common','Delete'),'class'=>'btn btn-sm btn-danger','data-method'=>'post', 'data-confirm'=>Yii::t('common','Are you sure to delete ?')]).
+                    "</div>";
+                }
+            ]
         ],
     ]); ?>
 
@@ -68,16 +83,36 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
 $urlBatchDelete = \yii\helpers\Url::to(['/goods/goods-brand/batch-delete']);
+$message = Yii::t('common','Are you sure to batch delete?');
+$confirmBtn = Yii::t('common','Ok');
+$cancleBtn = Yii::t('common','Cancle');
 $js = <<<JS
 jQuery(document).ready(function() {
     $("#batchDelete").click(function() {
-        var keys = $("#w0").yiiGridView("getSelectedRows");
-        $.ajax({
-            type: "POST",
-            url: "{$urlBatchDelete}",
-            dataType: "json",
-            data: {ids: keys}
-        });
+        bootbox.confirm(
+            {
+                message: "{$message}",
+                buttons: {
+                    confirm: {
+                        label: "{$confirmBtn}"
+                    },
+                    cancel: {
+                        label: "{$cancleBtn}"
+                    }
+                },
+                callback: function (confirmed) {
+                    if (confirmed) {
+                        var keys = $("#w0").yiiGridView("getSelectedRows");
+                        $.ajax({
+                            type: "POST",
+                            url: "{$urlBatchDelete}",
+                            dataType: "json",
+                            data: {ids: keys}
+                        });
+                    }
+                }
+            }
+        );
     });
 });
 JS;

@@ -38,4 +38,12 @@ return [
 	'Attachments' => '附件',
 	'Active' => '激活状态',
 	'Parent Category' => '父类',
+	'Ok' => '确认',
+	'Cancle' => '取消',
+	'Are you sure to batch delete?' => '确认批量删除？',
+	'Are you sure to delete ?' => '确认删除吗？',
+	'Operation' => '操作',
+	'View' => '查看',
+	'Update' => '修改',
+	'Delete' => '删除',
 ];
