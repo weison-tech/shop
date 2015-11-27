@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'sort',
             // 'description',
-[
+            [
             'attribute' => 'status',
                 'value'=>function($model){
                     return GoodsBrand::getStatusText($model->status);

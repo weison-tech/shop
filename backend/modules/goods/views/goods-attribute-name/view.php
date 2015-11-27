@@ -22,22 +22,44 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a(Yii::t('common','Back to list'), ['index'], ['class' => 'btn btn-info']) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            'category_id',
+            [
+                'attribute' => 'category_id',
+                'value'=>$model->category ? $model->category->name : '-',
+            ],
             'name',
-            'is_sku_attribute',
+            [
+                'attribute'=>'is_sku_attribute',
+                'value'=>$model::getIsSkuText($model->status),
+            ],
             'remark',
             'sort',
-            'status',
-            'created_at',
-            'created_by',
-            'updated_at',
-            'updated_by',
+            [
+                'attribute'=>'created_at',
+                'value'=>date("Y-m-d H:i:s",$model->created_at),
+            ],
+            [
+                'attribute'=>'created_by',
+                'value'=>$model->creator ? $model->creator->username : "-" ,
+            ],
+            [
+                'attribute'=>'updated_at',
+                'value'=>date("Y-m-d H:i:s",$model->updated_at),
+            ],
+            [
+                'attribute'=>'updated_by',
+                'value'=>$model->updator ? $model->updator->username : "-" ,
+            ],
+            [
+                'attribute'=>'status',
+                'value'=>$model::getStatusText($model->status),
+            ],
         ],
     ]) ?>
 

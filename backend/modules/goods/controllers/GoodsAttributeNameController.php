@@ -99,6 +99,27 @@ class GoodsAttributeNameController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        $model->status = GoodsAttributeName::STATUS_DELETED;
+        $model->save();
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Batch delete existing GoodsAttributeName models.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionBatchDelete()
+    {
+        $ids = Yii::$app->request->post('ids');
+        if (is_array($ids)) {
+            foreach ($ids as $id) {
+                $model = $this->findModel($id);
+                $model->status = GoodsAttributeName::STATUS_DELETED;
+                $model->save();
+            }
+        }
 
         return $this->redirect(['index']);
     }

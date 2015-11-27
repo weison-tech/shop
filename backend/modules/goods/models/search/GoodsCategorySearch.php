@@ -86,7 +86,7 @@ class GoodsCategorySearch extends GoodsCategory
             'id' => $this->id,
             'parent_id' => $this->parent_id,
             'sort' => $this->sort,
-            'created_at' => $this->created_at,
+            GoodsCategory::tableName().'.created_at' => $this->created_at,
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,

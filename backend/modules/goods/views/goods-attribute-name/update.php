@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\GoodsAttributeName */
 
-$this->title = Yii::t('goods-attribute-name', 'Update {modelClass}: ', [
+$this->title = Yii::t('goods-attribute-name', 'Update Goods Attribute Name: ', [
     'modelClass' => 'Goods Attribute Name',
 ]) . ' ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('goods-attribute-name', 'Goods Attribute Names'), 'url' => ['index']];

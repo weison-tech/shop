@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\GoodsAttributeName;
+use common\models\GoodsCategory;
 
 /**
  * GoodsAttributeNameSearch represents the model behind the search form about `common\models\GoodsAttributeName`.
@@ -13,13 +14,19 @@ use common\models\GoodsAttributeName;
 class GoodsAttributeNameSearch extends GoodsAttributeName
 {
     /**
+     * 存放搜索时的分类名
+     * @var $category_search 商品分类
+     */
+    public $category_search;
+
+    /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
             [['id', 'category_id', 'is_sku_attribute', 'sort', 'status', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
-            [['name', 'remark'], 'safe'],
+            [['name', 'remark', 'category_search'], 'safe'],
         ];
     }
 
@@ -41,12 +48,26 @@ class GoodsAttributeNameSearch extends GoodsAttributeName
      */
     public function search($params)
     {
-        $query = GoodsAttributeName::find();
+        $query = GoodsAttributeName::find()->where(['<>',GoodsAttributeName::tableName().'.status',GoodsAttributeName::STATUS_DELETED])
+                ->joinWith(['category']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+        ]);
+
+        $dataProvider->setSort([
+            'attributes' => [
+                'id',
+                'name',
+                'status',
+                'is_sku_attribute',
+                'category_search' => [
+                    'asc' => [GoodsCategory::tableName().'.name' => SORT_ASC],
+                    'desc' => [GoodsCategory::tableName().'.name' => SORT_DESC],
+                ],
+            ]
         ]);
 
         $this->load($params);
@@ -59,19 +80,20 @@ class GoodsAttributeNameSearch extends GoodsAttributeName
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            self::tableName().'.id' => $this->id,
             'category_id' => $this->category_id,
             'is_sku_attribute' => $this->is_sku_attribute,
-            'sort' => $this->sort,
-            'status' => $this->status,
+            self::tableName().'.sort' => $this->sort,
+            self::tableName().'.status' => $this->status,
             'created_at' => $this->created_at,
             'created_by' => $this->created_by,
             'updated_at' => $this->updated_at,
             'updated_by' => $this->updated_by,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['like', self::tableName().'.name', $this->name])
             ->andFilterWhere(['like', 'remark', $this->remark]);
+        $query->andFilterWhere(['like', GoodsCategory::tableName().'.name', $this->category_search]);
 
         return $dataProvider;
     }
