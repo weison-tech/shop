@@ -39,7 +39,7 @@ class GoodsCategory extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'ms_goods_category';
+        return '{{ms_goods_category}}';
     }
 
     /**

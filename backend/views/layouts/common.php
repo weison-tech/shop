@@ -147,6 +147,7 @@ $bundle = BackendAsset::register($this);
                             'items'=>[
                                 ['label'=>Yii::t('backend', 'Category Management'), 'url'=>['/goods/goods-category/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                                 ['label'=>Yii::t('backend', 'Brand Management'), 'url'=>['/goods/goods-brand/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>Yii::t('backend', 'Attribute Management'), 'url'=>['/goods/goods-attribute-name/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
                             ]
                         ],
                         [

@@ -90,4 +90,5 @@ return [
 	'Goods Management' => '商品管理',
 	'Category Management' => '分类管理',
 	'Brand Management' => '品牌管理',
+	'Attribute Management' => '属性管理',
 ];
