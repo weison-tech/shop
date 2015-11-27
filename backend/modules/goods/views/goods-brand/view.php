@@ -14,14 +14,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <p>
-        <?= Html::a(Yii::t('goods-brand', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('goods-brand', 'Delete'), ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('common','Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('common','Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('goods-brand', 'Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('common', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a(Yii::t('common','Back to list'), ['index'], ['class' => 'btn btn-info']) ?>
     </p>
 
     <?= DetailView::widget([
@@ -46,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute'=>'created_by',
-                'value'=>$model->creator ? $model->creator->username : "未设置" ,
+                'value'=>$model->creator ? $model->creator->username : "-" ,
             ],
             [
                 'attribute'=>'updated_at',
@@ -54,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute'=>'updated_by',
-                'value'=>$model->updator ? $model->updator->username : "未设置" ,
+                'value'=>$model->updator ? $model->updator->username : "-" ,
             ],
             [
                 'attribute'=>'status',
