@@ -28,6 +28,8 @@
         "bower-asset/html5shiv": "^3.0",
         "weison-tech/yii2-file-kit": "*",
         "kartik-v/yii2-widget-datetimepicker": "dev-master",
+        "kartik-v/yii2-widget-datepicker": "@dev",
+        "kartik-v/yii2-field-range": "*",
         "weison-tech/yii2-admin": "~3.0"
     },
     "require-dev": {

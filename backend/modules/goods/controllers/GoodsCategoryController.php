@@ -58,6 +58,11 @@ class GoodsCategoryController extends Controller
         $searchModel = new GoodsCategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        //the advanced search via post method submit
+        if(count(Yii::$app->request->bodyParams)>0){
+            $dataProvider = $searchModel->search(Yii::$app->request->bodyParams);
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

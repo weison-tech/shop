@@ -47,4 +47,8 @@ return [
 	'Delete' => '删除',
 	'Are you sure you want to delete this item?' => '确认删除此项？',
 	'Back to list' => '返回列表',
+	'Search' => '搜索',
+	'Reset' => '重置',
+	'Advanced Search' => '高级搜索',
+	'Create Time' => '创建时间',
 ];

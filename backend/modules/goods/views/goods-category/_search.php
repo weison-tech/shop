@@ -1,7 +1,10 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
+use kartik\date\DatePicker;
+use common\models\GoodsCategory;
 
 /* @var $this yii\web\View */
 /* @var $model backend\modules\goods\models\search\GoodsCategorySearch */
@@ -12,34 +15,58 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
-        'method' => 'get',
+        'method' => 'post',
+        'options' =>['class' => 'well'],
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <?= $form->field($model, 'id') ?>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <?= $form->field($model, 'name') ?>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <?= $form->field($model, 'parent_id')->dropDownList(ArrayHelper::map(GoodsCategory::get(0, GoodsCategory::find()->where(['status'=>GoodsCategory::STATUS_ENABLED])->asArray()->all()), 'id', 'label'),
+                    ['class' => 'form-control', 'prompt' => Yii::t('goods-category', 'Please Filter')]) ?>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <?php
+            echo '<label class="control-label">'.Yii::t('common','Create Time').'</label>';
+            echo DatePicker::widget([
+                'name' => 'create_from_date',
+                'value' => date('Y-m-d'),
+                'type' => DatePicker::TYPE_RANGE,
+                'name2' => 'create_to_date',
+                'value2' => date('Y-m-d'),
+                'pluginOptions' => [
+                    'autoclose'=>true,
+                    'format' => 'yyyy-m-dd'
+                ]
+            ]);
+            ?>
+        </div>
+    </div>
 
-    <?= $form->field($model, 'parent_id') ?>
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <?= $form->field($model, 'sort') ?>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <?= $form->field($model, 'remark') ?>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <?= $form->field($model, 'created_by') ?>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <?= $form->field($model, 'status') ?>
 
-    <?= $form->field($model, 'name') ?>
-
-    <?= $form->field($model, 'ico') ?>
-
-    <?= $form->field($model, 'sort') ?>
-
-    <?php // echo $form->field($model, 'remark') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'created_by') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
-
-    <?php // echo $form->field($model, 'updated_by') ?>
-
-    <?php // echo $form->field($model, 'status') ?>
+        </div>
+    </div>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton(Yii::t('common','Search'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('common','Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

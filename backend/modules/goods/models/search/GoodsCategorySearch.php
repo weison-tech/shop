@@ -83,7 +83,7 @@ class GoodsCategorySearch extends GoodsCategory
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            GoodsCategory::tableName().'.id' => $this->id,
             'parent_id' => $this->parent_id,
             'sort' => $this->sort,
             GoodsCategory::tableName().'.created_at' => $this->created_at,
@@ -92,6 +92,10 @@ class GoodsCategorySearch extends GoodsCategory
             'updated_by' => $this->updated_by,
             'status' => $this->status,
         ]);
+
+        if(isset($params['create_from_date']) && isset($params['create_to_date']) && $params['create_from_date'] && $params['create_to_date']){
+            $query->andFilterWhere(['between', GoodsCategory::tableName().'.created_at', strtotime($params['create_from_date']), strtotime($params['create_to_date'])]);
+        }
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'ico_path', $this->ico_path])

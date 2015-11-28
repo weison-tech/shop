@@ -15,11 +15,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="goods-category-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <div id="advanced-search-form" style="display: none;"><?php echo $this->render('_search', ['model' => $searchModel]); ?></div>
 
     <p>
         <?= Html::a(Yii::t('goods-category','Create Goods Category'), ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a(Yii::t('goods-brand', 'Batch Delete'), 'javascript:void(0);', ['class' => 'btn btn-danger', 'id' => 'batchDelete']) ?>
+        <?= Html::a(Yii::t('goods-brand', Yii::t('common','Advanced Search')), 'javascript:void(0);', ['class' => 'btn btn-info', 'id' => 'search']) ?>
     </p>
 
     <?= GridView::widget([
@@ -96,6 +97,10 @@ $confirmBtn = Yii::t('common','Ok');
 $cancleBtn = Yii::t('common','Cancle');
 $js = <<<JS
 jQuery(document).ready(function() {
+    $("#search").click(function(){
+        $("#advanced-search-form").toggle();
+    });
+
     $("#batchDelete").click(function() {
         bootbox.confirm(
             {
