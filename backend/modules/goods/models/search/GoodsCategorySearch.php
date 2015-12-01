@@ -20,13 +20,39 @@ class GoodsCategorySearch extends GoodsCategory
     public $created_person;
 
     /**
+     * 存放搜索时的用户名
+     * @var $updated_person 修改人
+     */
+    public $updated_person;
+
+    /**
+     * 搜索创建时间 --开始
+     */
+    public $create_from_date;
+
+    /**
+     * 搜索创建时间 --结束
+     */
+    public $create_to_date;
+
+    /**
+     * 搜索修改时间 --开始
+     */
+    public $updated_from_date;
+
+    /**
+     * 搜索修改时间 --结束
+     */
+    public $updated_to_date;
+
+    /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'sort', 'created_at', 'created_by', 'updated_at', 'updated_by', 'status'], 'integer'],
-            [['name', 'ico_path', 'remark', 'created_person'], 'safe'],
+            [['id', 'parent_id', 'sort', 'created_by', 'updated_by', 'status'], 'integer'],
+            [['name', 'remark', 'created_person', 'updated_person', 'create_from_date', 'create_to_date'], 'safe'],
         ];
     }
 
@@ -66,7 +92,12 @@ class GoodsCategorySearch extends GoodsCategory
                 'created_at',
                 'created_by',
                 'status',
+                'updated_at',
                 'created_person' => [
+                    'asc' => [User::tableName().'.username' => SORT_ASC],
+                    'desc' => [User::tableName().'.username' => SORT_DESC],
+                ],
+                'updated_person' => [
                     'asc' => [User::tableName().'.username' => SORT_ASC],
                     'desc' => [User::tableName().'.username' => SORT_DESC],
                 ],
@@ -93,14 +124,25 @@ class GoodsCategorySearch extends GoodsCategory
             'status' => $this->status,
         ]);
 
+        //created time search
         if(isset($params['create_from_date']) && isset($params['create_to_date']) && $params['create_from_date'] && $params['create_to_date']){
-            $query->andFilterWhere(['between', GoodsCategory::tableName().'.created_at', strtotime($params['create_from_date']), strtotime($params['create_to_date'])]);
+            $this->create_from_date = $params['create_from_date'];
+            $this->create_to_date = $params['create_to_date'];
+            $query->andFilterWhere(['between', GoodsCategory::tableName().'.created_at', strtotime($this->create_from_date), strtotime($this->create_to_date)]);
+        }
+
+        //updated time search
+        if(isset($params['updated_from_date']) && isset($params['updated_to_date']) && $params['updated_from_date'] && $params['updated_to_date']){
+            $this->updated_from_date = $params['updated_from_date'];
+            $this->updated_to_date = $params['updated_to_date'];
+            $query->andFilterWhere(['between', GoodsCategory::tableName().'.updated_at', strtotime($this->updated_from_date), strtotime($this->updated_to_date)]);
         }
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'ico_path', $this->ico_path])
             ->andFilterWhere(['like', 'remark', $this->remark]);
         $query->andFilterWhere(['like', User::tableName().'.username', $this->created_person]);
+        $query->andFilterWhere(['like', User::tableName().'.username', $this->updated_person]);
 
         return $dataProvider;
     }

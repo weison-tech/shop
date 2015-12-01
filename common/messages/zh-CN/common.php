@@ -50,5 +50,6 @@ return [
 	'Search' => '搜索',
 	'Reset' => '重置',
 	'Advanced Search' => '高级搜索',
-	'Create Time' => '创建时间',
+	'Created Time' => '创建时间',
+	'Updated Time' => '修改时间',
 ];

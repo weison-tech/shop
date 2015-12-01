@@ -48,7 +48,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->ico_path ? Html::img($model->ico_base_url."/".$model->ico_path,['style'=>'width:100px;height:100px;']) : '-';
                 },
             ],
-            'sort',
+            [
+                'attribute'=>'created_person',
+                'value' => 'creator.username',
+            ],
             [
                 'attribute' => 'created_at',
                 'value'=>function($model){
@@ -56,10 +59,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             [
-                'attribute'=>'created_person',
-                'value' => 'creator.username',
+                'attribute'=>'updated_person',
+                'value' => 'updator.username',
             ],
-
+            [
+                'attribute' => 'updated_at',
+                'value'=>function($model){
+                    return date("Y-m-d H:i:s",$model->updated_at);
+                },
+            ],
             [
                 'attribute' => 'status',
                 'value'=>function($model){

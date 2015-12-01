@@ -98,6 +98,7 @@ class GoodsCategory extends \yii\db\ActiveRecord
             'updated_by' => Yii::t('model-goods-category', 'Update By'),
             'status' => Yii::t('model-goods-category', 'Status'),
             'created_person' => Yii::t('model-goods-category', 'Create Person'),
+            'updated_person' => Yii::t('model-goods-category', 'Updated Person'),
         ];
     }
 

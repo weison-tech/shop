@@ -31,36 +31,48 @@ use common\models\GoodsCategory;
                     ['class' => 'form-control', 'prompt' => Yii::t('goods-category', 'Please Filter')]) ?>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
-            <?php
-            echo '<label class="control-label">'.Yii::t('common','Create Time').'</label>';
-            echo DatePicker::widget([
-                'name' => 'create_from_date',
-                'value' => date('Y-m-d'),
-                'type' => DatePicker::TYPE_RANGE,
-                'name2' => 'create_to_date',
-                'value2' => date('Y-m-d'),
-                'pluginOptions' => [
-                    'autoclose'=>true,
-                    'format' => 'yyyy-m-dd'
-                ]
-            ]);
-            ?>
+            <?= $form->field($model, 'status')->dropdownList(GoodsCategory::getStatusArr()) ?>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
-            <?= $form->field($model, 'sort') ?>
+            <?= $form->field($model, 'created_person') ?>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
-            <?= $form->field($model, 'remark') ?>
+            <?php
+                echo '<label class="control-label">'.Yii::t('common','Created Time').'</label>';
+                echo DatePicker::widget([
+                    'name' => 'create_from_date',
+                    'value' => $model->create_from_date ? $model->create_from_date : date('Y-m-d'),
+                    'type' => DatePicker::TYPE_RANGE,
+                    'name2' => 'create_to_date',
+                    'value2' => $model->create_to_date ? $model->create_to_date : date('Y-m-d'),
+                    'pluginOptions' => [
+                        'autoclose'=>true,
+                        'format' => 'yyyy-m-dd'
+                    ]
+                ]);
+            ?>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
-            <?= $form->field($model, 'created_by') ?>
+            <?= $form->field($model, 'updated_person') ?>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
-            <?= $form->field($model, 'status') ?>
-
+            <?php
+                echo '<label class="control-label">'.Yii::t('common','Updated Time').'</label>';
+                echo DatePicker::widget([
+                    'name' => 'updated_from_date',
+                    'value' => $model->updated_from_date ? $model->updated_from_date : date('Y-m-d'),
+                    'type' => DatePicker::TYPE_RANGE,
+                    'name2' => 'updated_to_date',
+                    'value2' => $model->updated_to_date ? $model->updated_to_date : date('Y-m-d'),
+                    'pluginOptions' => [
+                        'autoclose'=>true,
+                        'format' => 'yyyy-m-dd'
+                    ]
+                ]);
+            ?>
         </div>
     </div>
 

@@ -31,4 +31,5 @@ return [
     'Enabled' => '有效',
     'Deleted' => '删除',
     'Create Person' => '创建人',
+    'Updated Person' => '修改人',
 ];
