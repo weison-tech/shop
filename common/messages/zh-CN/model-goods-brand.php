@@ -29,4 +29,6 @@ return [
     'Updated At' => '修改时间',
     'Updated By' => '修改人',
     'Category Search' => '所属分类',
+    'Create Person' => '创建人',
+    'Updated Person' => '修改人',
 ];

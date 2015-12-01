@@ -52,4 +52,6 @@ return [
 	'Advanced Search' => '高级搜索',
 	'Created Time' => '创建时间',
 	'Updated Time' => '修改时间',
+	'Created Person' => '创建人',
+	'Updated Person' => '修改人',
 ];

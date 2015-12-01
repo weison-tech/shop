@@ -16,11 +16,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="goods-brand-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <div id="advanced-search-form" style="display: none;"><?php echo $this->render('_search', ['model' => $searchModel]); ?></div>
 
     <p>
         <?= Html::a(Yii::t('goods-brand', 'Create Goods Brand'), ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a(Yii::t('goods-brand', 'Batch Delete'), 'javascript:void(0);', ['class' => 'btn btn-danger', 'id' => 'batchDelete']) ?>
+        <?= Html::a(Yii::t('goods-brand', Yii::t('common','Advanced Search')), 'javascript:void(0);', ['class' => 'btn btn-info', 'id' => 'search']) ?>
     </p>
 
     <?= GridView::widget([
@@ -47,7 +48,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::img($model->logo_base_url."/".$model->logo_path,['style'=>'width:100px;height:100px;']);
                 },
             ],
-            'sort',
             // 'description',
             [
             'attribute' => 'status',
@@ -56,10 +56,26 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => GoodsBrand::getStatusArr(),
             ],
-            // 'created_at',
-            // 'created_by',
-            // 'updated_at',
-            // 'updated_by',
+            [
+                'attribute'=>'created_person',
+                'value' => 'creator.username',
+            ],
+            [
+                'attribute' => 'created_at',
+                'value'=>function($model){
+                    return date("Y-m-d H:i:s",$model->created_at);
+                },
+            ],
+            [
+                'attribute'=>'updated_person',
+                'value' => 'updator.username',
+            ],
+            [
+                'attribute' => 'updated_at',
+                'value'=>function($model){
+                    return date("Y-m-d H:i:s",$model->updated_at);
+                },
+            ],
 
             // ['class' => 'yii\grid\ActionColumn'],
             [
@@ -89,6 +105,10 @@ $confirmBtn = Yii::t('common','Ok');
 $cancleBtn = Yii::t('common','Cancle');
 $js = <<<JS
 jQuery(document).ready(function() {
+    $("#search").click(function(){
+        $("#advanced-search-form").toggle();
+    });
+
     $("#batchDelete").click(function() {
         bootbox.confirm(
             {

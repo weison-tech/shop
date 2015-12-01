@@ -100,6 +100,8 @@ class GoodsBrand extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('model-goods-brand', 'Updated At'),
             'updated_by' => Yii::t('model-goods-brand', 'Updated By'),
             'category_search' => Yii::t('model-goods-brand', 'Category Search'),
+            'created_person' => Yii::t('model-goods-brand', 'Create Person'),
+            'updated_person' => Yii::t('model-goods-brand', 'Updated Person'),
         ];
     }
 
