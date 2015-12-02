@@ -81,8 +81,8 @@ class GoodsBrandSearch extends GoodsBrand
      */
     public function search($params)
     {
-        $query = GoodsBrand::find()->where(['<>',GoodsBrand::tableName().'.status',GoodsBrand::STATUS_DELETED])
-                ->joinWith(['category'])->joinWith(['creator']);
+        $query = GoodsBrand::find()->where(['<>',GoodsBrand::tableName().'.status',GoodsBrand::STATUS_DELETED]);
+        $query->joinWith(['category']);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -119,6 +119,16 @@ class GoodsBrandSearch extends GoodsBrand
         ]);
 
         $this->load($params);
+
+        /**
+         * Cause creator and updator use the same table
+         * So must handle like below
+         */
+        if($this->created_person){
+            $query->joinWith(['creator']);
+        }else if($this->updated_person){
+            $query->joinWith(['updator']);
+        }
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails

@@ -74,8 +74,7 @@ class GoodsCategorySearch extends GoodsCategory
      */
     public function search($params)
     {
-        $query = GoodsCategory::find()->where(['<>','status',GoodsCategory::STATUS_DELETED])
-                ->joinWith(['creator']);
+        $query = GoodsCategory::find()->where(['<>','status',GoodsCategory::STATUS_DELETED]);
 
         // add conditions that should always apply here
 
@@ -105,6 +104,16 @@ class GoodsCategorySearch extends GoodsCategory
         ]);
 
         $this->load($params);
+
+        /**
+         * Cause creator and updator use the same table
+         * So must handle like below
+         */
+        if($this->created_person){
+            $query->joinWith(['creator']);
+        }else if($this->updated_person){
+            $query->joinWith(['updator']);
+        }
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
