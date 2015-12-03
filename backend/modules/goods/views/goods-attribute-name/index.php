@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\CheckboxColumn'],
 
             'id',
+            'name',
             [
                 'attribute'=>'category_search',
                 'value' => 'category.name',
@@ -41,7 +42,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'form-control', 'prompt' => Yii::t('goods-category', 'Please Filter')]
                 ),
             ],
-            'name',
             [
                 'attribute' => 'is_sku_attribute',
                 'value'=>function($model){
