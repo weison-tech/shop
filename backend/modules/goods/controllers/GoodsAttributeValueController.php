@@ -3,16 +3,16 @@
 namespace backend\modules\goods\controllers;
 
 use Yii;
-use common\models\GoodsAttributeName;
-use backend\modules\goods\models\search\GoodsAttributeNameSearch;
+use common\models\GoodsAttributeValue;
+use backend\modules\goods\models\search\GoodsAttributeValueSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * GoodsAttributeNameController implements the CRUD actions for GoodsAttributeName model.
+ * GoodsAttributeValueController implements the CRUD actions for GoodsAttributeValue model.
  */
-class GoodsAttributeNameController extends Controller
+class GoodsAttributeValueController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class GoodsAttributeNameController extends Controller
     }
 
     /**
-     * Lists all GoodsAttributeName models.
+     * Lists all GoodsAttributeValue models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new GoodsAttributeNameSearch();
+        $searchModel = new GoodsAttributeValueSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class GoodsAttributeNameController extends Controller
     }
 
     /**
-     * Displays a single GoodsAttributeName model.
+     * Displays a single GoodsAttributeValue model.
      * @param string $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class GoodsAttributeNameController extends Controller
     }
 
     /**
-     * Creates a new GoodsAttributeName model.
+     * Creates a new GoodsAttributeValue model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new GoodsAttributeName();
+        $model = new GoodsAttributeValue();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class GoodsAttributeNameController extends Controller
     }
 
     /**
-     * Updates an existing GoodsAttributeName model.
+     * Updates an existing GoodsAttributeValue model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -91,7 +91,7 @@ class GoodsAttributeNameController extends Controller
     }
 
     /**
-     * Deletes an existing GoodsAttributeName model.
+     * Deletes an existing GoodsAttributeValue model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -99,41 +99,20 @@ class GoodsAttributeNameController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        $model->status = GoodsAttributeName::STATUS_DELETED;
-        $model->save();
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Batch delete existing GoodsAttributeName models.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionBatchDelete()
-    {
-        $ids = Yii::$app->request->post('ids');
-        if (is_array($ids)) {
-            foreach ($ids as $id) {
-                $model = $this->findModel($id);
-                $model->status = GoodsAttributeName::STATUS_DELETED;
-                $model->save();
-            }
-        }
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the GoodsAttributeName model based on its primary key value.
+     * Finds the GoodsAttributeValue model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return GoodsAttributeName the loaded model
+     * @return GoodsAttributeValue the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = GoodsAttributeName::findOne($id)) !== null) {
+        if (($model = GoodsAttributeValue::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

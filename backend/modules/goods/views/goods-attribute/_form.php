@@ -28,7 +28,7 @@ use common\models\GoodsAttributeName;
     <?= $form->field($model, 'status')->dropdownList(GoodsAttributeName::getStatusArr()) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('goods-attribute-name', 'Create') : Yii::t('goods-attribute-name', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('goods-attribute', 'Create') : Yii::t('goods-attribute', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -11,7 +11,7 @@ use common\models\GoodsAttributeName;
 /* @var $searchModel backend\modules\goods\models\search\GoodsAttributeNameSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('goods-attribute-name', 'Goods Attribute Names');
+$this->title = Yii::t('goods-attribute', 'Goods Attribute Names');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="goods-attribute-name-index">
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div id="advanced-search-form" style="display: none;"><?php echo $this->render('_search', ['model' => $searchModel]); ?></div>
 
     <p>
-        <?= Html::a(Yii::t('goods-attribute-name', 'Create Goods Attribute Name'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('goods-attribute', 'Create Goods Attribute Name'), ['create'], ['class' => 'btn btn-success']) ?>
         <?= Html::a(Yii::t('goods-brand', 'Batch Delete'), 'javascript:void(0);', ['class' => 'btn btn-danger', 'id' => 'batchDelete']) ?>
         <?= Html::a(Yii::t('goods-brand', Yii::t('common','Advanced Search')), 'javascript:void(0);', ['class' => 'btn btn-info', 'id' => 'search']) ?>
     </p>

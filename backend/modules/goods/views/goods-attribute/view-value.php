@@ -4,46 +4,39 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\GoodsAttributeName */
+/* @var $model common\models\GoodsAttributeValue */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('goods-attribute-name', 'Goods Attribute Names'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('goods-attribute', 'Goods Attribute Values'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="goods-attribute-name-view">
+<div class="goods-attribute-value-view">
 
 
     <p>
-        <?= Html::a(Yii::t('goods-attribute-name', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('goods-attribute-name', 'Delete'), ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('goods-attribute', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('goods-attribute', 'Delete'), ['delete-value', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('goods-attribute-name', 'Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('goods-attribute', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a(Yii::t('common','Back to list'), ['index'], ['class' => 'btn btn-info']) ?>
+        <?= Html::a(Yii::t('common','Back to list'), ['view?id='.$model->attribute_name_id], ['class' => 'btn btn-info']) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            [
-                'attribute' => 'category_id',
-                'value'=>$model->category ? $model->category->name : '-',
-            ],
+            'attribute_name_id',
             'name',
             [
-                'attribute'=>'is_sku_attribute',
-                'value'=>$model::getIsSkuText($model->status),
+                'attribute'=>'ico',
+                'value'=>$model->ico_path ? $model->ico_base_url."/".$model->ico_path : '-',
+                'format' => [$model->ico_path ? 'image' : 'text', ['width'=>'100','height'=>'100']],
             ],
-            'remark',
             'sort',
-            [
-                'attribute'=>'created_at',
-                'value'=>date("Y-m-d H:i:s",$model->created_at),
-            ],
             [
                 'attribute'=>'created_by',
                 'value'=>$model->creator ? $model->creator->username : "-" ,

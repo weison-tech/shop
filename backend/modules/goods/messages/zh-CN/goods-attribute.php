@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Message translations.
  *
@@ -17,23 +18,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-	'Category ID' => '所属分类',
-    'Name' => '属性名',
-    'Is Sku Attribute' => '是否SKU属性',
-    'Logo Base Url' => '',
-    'Remark' => '备注',
-    'Created At' => '创建时间',
-    'Created By' => '创建人',
-    'Updated At' => '修改时间',
-    'Updated By' => '修改人',
-    'Sort' => '排序',
-    'Status' => '状态',
-    'Disabled' => '失效',
-    'Enabled' => '有效',
-    'Deleted' => '删除',
-    'Is Sku' => '是Sku属性',
-    'Not Sku' => '不是Sku属性',
-    'Category Search' => '所属分类',
-    'Create Person' => '创建人',
-    'Updated Person' => '修改人',
+    'Goods Attribute Names' => '商品属性管理',
+    'Create Goods Attribute Name' => '创建属性',
+    'Create' => '创建',
+    'Update' => '修改',
+    'Update Goods Category: ' => '修改分类:',
+    'Delete' => '删除',
+    'Please Filter' => '请选择',
+    'Batch Delete' => '批量删除',
+    'Update Goods Attribute Name: ' => '修改商品属性：',
+    'Create Goods Attribute Value' => '添加属性值',
+    'Attribute : ' => '属性 ：',
+    'Goods Attribute value list' => '属性值列表',
 ];

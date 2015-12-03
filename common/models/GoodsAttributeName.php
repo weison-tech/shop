@@ -78,20 +78,20 @@ class GoodsAttributeName extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('model-goods-attribute-name', 'ID'),
-            'category_id' => Yii::t('model-goods-attribute-name', 'Category ID'),
-            'name' => Yii::t('model-goods-attribute-name', 'Name'),
-            'is_sku_attribute' => Yii::t('model-goods-attribute-name', 'Is Sku Attribute'),
-            'remark' => Yii::t('model-goods-attribute-name', 'Remark'),
-            'sort' => Yii::t('model-goods-attribute-name', 'Sort'),
-            'status' => Yii::t('model-goods-attribute-name', 'Status'),
-            'created_at' => Yii::t('model-goods-attribute-name', 'Created At'),
-            'created_by' => Yii::t('model-goods-attribute-name', 'Created By'),
-            'updated_at' => Yii::t('model-goods-attribute-name', 'Updated At'),
-            'updated_by' => Yii::t('model-goods-attribute-name', 'Updated By'),
-            'category_search' => Yii::t('model-goods-attribute-name', 'Category Search'),
-            'created_person' => Yii::t('model-goods-attribute-name', 'Create Person'),
-            'updated_person' => Yii::t('model-goods-attribute-name', 'Updated Person'),
+            'id' => Yii::t('model-goods-attribute', 'ID'),
+            'category_id' => Yii::t('model-goods-attribute', 'Category ID'),
+            'name' => Yii::t('model-goods-attribute', 'Name'),
+            'is_sku_attribute' => Yii::t('model-goods-attribute', 'Is Sku Attribute'),
+            'remark' => Yii::t('model-goods-attribute', 'Remark'),
+            'sort' => Yii::t('model-goods-attribute', 'Sort'),
+            'status' => Yii::t('model-goods-attribute', 'Status'),
+            'created_at' => Yii::t('model-goods-attribute', 'Created At'),
+            'created_by' => Yii::t('model-goods-attribute', 'Created By'),
+            'updated_at' => Yii::t('model-goods-attribute', 'Updated At'),
+            'updated_by' => Yii::t('model-goods-attribute', 'Updated By'),
+            'category_search' => Yii::t('model-goods-attribute', 'Category Search'),
+            'created_person' => Yii::t('model-goods-attribute', 'Create Person'),
+            'updated_person' => Yii::t('model-goods-attribute', 'Updated Person'),
         ];
     }
 
@@ -130,9 +130,9 @@ class GoodsAttributeName extends \yii\db\ActiveRecord
     public static function getStatusArr()
     {
         return [
-            self::STATUS_ENABLED => Yii::t('model-goods-attribute-name','Enabled'),
-            self::STATUS_DISABLED => Yii::t('model-goods-attribute-name','Disabled'),
-            // self::STATUS_DELETED => Yii::t('model-goods-attribute-name','Deleted'),
+            self::STATUS_ENABLED => Yii::t('model-goods-attribute','Enabled'),
+            self::STATUS_DISABLED => Yii::t('model-goods-attribute','Disabled'),
+            // self::STATUS_DELETED => Yii::t('model-goods-attribute','Deleted'),
         ];
     }
 
@@ -144,8 +144,8 @@ class GoodsAttributeName extends \yii\db\ActiveRecord
     public static function getIsSkuArr()
     {
         return [
-            self::IS_SKU_YES => Yii::t('model-goods-attribute-name','Not Sku'),
-            self::IS_SKU_NO => Yii::t('model-goods-attribute-name','Is Sku'),
+            self::IS_SKU_YES => Yii::t('model-goods-attribute','Not Sku'),
+            self::IS_SKU_NO => Yii::t('model-goods-attribute','Is Sku'),
         ];
     }
 
@@ -158,11 +158,11 @@ class GoodsAttributeName extends \yii\db\ActiveRecord
     {
         $text = '';
         if($status == self::STATUS_ENABLED){
-            $text = Yii::t('model-goods-attribute-name','Enabled');
+            $text = Yii::t('model-goods-attribute','Enabled');
         }else if($status == self::STATUS_DISABLED){
-            $text = Yii::t('model-goods-attribute-name','Disabled');
+            $text = Yii::t('model-goods-attribute','Disabled');
         }else if($status == self::STATUS_DELETED){
-            $text = Yii::t('model-goods-attribute-name','Deleted');
+            $text = Yii::t('model-goods-attribute','Deleted');
         }
         return $text;
     }
@@ -177,9 +177,9 @@ class GoodsAttributeName extends \yii\db\ActiveRecord
     {
         $text = '';
         if($isSku == self::IS_SKU_YES){
-            $text = Yii::t('model-goods-attribute-name','Is Sku');
+            $text = Yii::t('model-goods-attribute','Is Sku');
         }else if($isSku == self::IS_SKU_NO){
-            $text = Yii::t('model-goods-attribute-name','Not Sku');
+            $text = Yii::t('model-goods-attribute','Not Sku');
         }
         return $text;
     }
