@@ -40,4 +40,5 @@ return [
     'Attribute Value' => '属性值',
     'Ico' => '小图标',
     'Ico Path' => '小图标',
+    'Attribute Name ID' => '属性名',
 ];

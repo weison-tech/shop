@@ -30,4 +30,5 @@ return [
     'Create Goods Attribute Value' => '添加属性值',
     'Attribute : ' => '属性 ：',
     'Goods Attribute value list' => '属性值列表',
+    'Update Goods Attribute Value: ' => '修改属性值',
 ];

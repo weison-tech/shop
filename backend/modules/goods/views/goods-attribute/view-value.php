@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <p>
-        <?= Html::a(Yii::t('goods-attribute', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('goods-attribute', 'Update'), ['update-value', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('goods-attribute', 'Delete'), ['delete-value', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -29,7 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'attribute_name_id',
+            [
+                'attribute'=>'attribute_name_id',
+                'value'=>$model->attributeName ? $model->attributeName->name : "-" ,
+            ],
             'name',
             [
                 'attribute'=>'ico',

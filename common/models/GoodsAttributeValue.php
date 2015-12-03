@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use trntv\filekit\behaviors\UploadBehavior;
+use common\models\GoodsAttributeName;
 
 /**
  * This is the model class for table "{{%goods_attribute_value}}".
@@ -89,7 +90,8 @@ class GoodsAttributeValue extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('model-goods-attribute', 'ID'),
             'attribute_name_id' => Yii::t('model-goods-attribute', 'Attribute Name ID'),
-            'name' => Yii::t('model-goods-attribute', 'Name'),
+            'name' => Yii::t('model-goods-attribute', 'Attribute Value'),
+            'ico' => Yii::t('model-goods-attribute', 'Ico Path'),
             'ico_path' => Yii::t('model-goods-attribute', 'Ico Path'),
             'ico_base_url' => Yii::t('model-goods-attribute', 'Ico Base Url'),
             'sort' => Yii::t('model-goods-attribute', 'Sort'),
@@ -108,6 +110,15 @@ class GoodsAttributeValue extends \yii\db\ActiveRecord
     public function getUpdator()
     {
         return $this->hasOne(User::className(), ['id' => 'updated_by']);
+    }
+
+    /**
+     * relation to Attribute name
+     * @return ActiveRecord Attribute name recorder
+     */
+    public function getAttributeName()
+    {
+        return $this->hasOne(GoodsAttributeName::className(), ['id' => 'updated_by']);
     }
 
     /**

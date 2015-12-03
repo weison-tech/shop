@@ -41,7 +41,7 @@ class GoodsAttributeValueSearch extends GoodsAttributeValue
      */
     public function search($params)
     {
-        $query = GoodsAttributeValue::find();
+        $query = GoodsAttributeValue::find()->where(['<>',GoodsAttributeValue::tableName().'.status',GoodsAttributeValue::STATUS_DELETED]);
 
         // add conditions that should always apply here
 
