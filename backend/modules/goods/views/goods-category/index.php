@@ -28,7 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\CheckboxColumn'],
-
+            'id',
+            [
+                'attribute' => 'ico_path',
+                'content'=>function($model){
+                    return $model->ico_path ? Html::img($model->ico_base_url."/".$model->ico_path,['style'=>'width:100px;height:100px;']) : '-';
+                },
+            ],
+            'name',
             [
                 'attribute' => 'parent_id',
                 'value'=>function ($model) {
@@ -41,33 +48,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['class' => 'form-control', 'prompt' => Yii::t('goods-category', 'Please Filter')]
                 ),
             ],
-            'name',
-            [
-                'attribute' => 'ico_path',
-                'content'=>function($model){
-                    return $model->ico_path ? Html::img($model->ico_base_url."/".$model->ico_path,['style'=>'width:100px;height:100px;']) : '-';
-                },
-            ],
-            [
-                'attribute'=>'created_person',
-                'value' => 'creator.username',
-            ],
-            [
-                'attribute' => 'created_at',
-                'value'=>function($model){
-                    return date("Y-m-d H:i:s",$model->created_at);
-                },
-            ],
-            [
-                'attribute'=>'updated_person',
-                'value' => 'updator.username',
-            ],
-            [
-                'attribute' => 'updated_at',
-                'value'=>function($model){
-                    return date("Y-m-d H:i:s",$model->updated_at);
-                },
-            ],
             [
                 'attribute' => 'status',
                 'value'=>function($model){
@@ -75,6 +55,27 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => GoodsCategory::getStatusArr(),
             ],
+            // [
+            //     'attribute'=>'created_person',
+            //     'value' => 'creator.username',
+            // ],
+            // [
+            //     'attribute' => 'created_at',
+            //     'value'=>function($model){
+            //         return date("Y-m-d H:i:s",$model->created_at);
+            //     },
+            // ],
+            // [
+            //     'attribute'=>'updated_person',
+            //     'value' => 'updator.username',
+            // ],
+            // [
+            //     'attribute' => 'updated_at',
+            //     'value'=>function($model){
+            //         return date("Y-m-d H:i:s",$model->updated_at);
+            //     },
+            // ],
+
 
             // ['class' => 'yii\grid\ActionColumn'],
 
@@ -123,7 +124,7 @@ jQuery(document).ready(function() {
                 },
                 callback: function (confirmed) {
                     if (confirmed) {
-                        var keys = $("#w0").yiiGridView("getSelectedRows");
+                        var keys = $(".grid-view").yiiGridView("getSelectedRows");
                         $.ajax({
                             type: "POST",
                             url: "{$urlBatchDelete}",

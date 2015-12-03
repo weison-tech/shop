@@ -7,6 +7,7 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\GoodsAttributeName;
 use common\models\GoodsCategory;
+use common\models\User;
 
 /**
  * GoodsAttributeNameSearch represents the model behind the search form about `common\models\GoodsAttributeName`.
@@ -20,13 +21,45 @@ class GoodsAttributeNameSearch extends GoodsAttributeName
     public $category_search;
 
     /**
+     * 存放搜索时的用户名
+     * @var $created_person 创建人
+     */
+    public $created_person;
+
+    /**
+     * 存放搜索时的用户名
+     * @var $updated_person 修改人
+     */
+    public $updated_person;
+
+    /**
+     * 搜索创建时间 --开始
+     */
+    public $create_from_date;
+
+    /**
+     * 搜索创建时间 --结束
+     */
+    public $create_to_date;
+
+    /**
+     * 搜索修改时间 --开始
+     */
+    public $updated_from_date;
+
+    /**
+     * 搜索修改时间 --结束
+     */
+    public $updated_to_date;
+
+    /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'category_id', 'is_sku_attribute', 'sort', 'status', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
-            [['name', 'remark', 'category_search'], 'safe'],
+            [['id', 'category_id', 'is_sku_attribute', 'sort', 'status', 'created_by', 'updated_by'], 'integer'],
+            [['name', 'remark', 'category_search', 'created_person', 'updated_person'], 'safe'],
         ];
     }
 
@@ -63,9 +96,19 @@ class GoodsAttributeNameSearch extends GoodsAttributeName
                 'name',
                 'status',
                 'is_sku_attribute',
+                'created_at',
+                'updated_at',
                 'category_search' => [
                     'asc' => [GoodsCategory::tableName().'.name' => SORT_ASC],
                     'desc' => [GoodsCategory::tableName().'.name' => SORT_DESC],
+                ],
+                'created_person' => [
+                    'asc' => [User::tableName().'.username' => SORT_ASC],
+                    'desc' => [User::tableName().'.username' => SORT_DESC],
+                ],
+                'updated_person' => [
+                    'asc' => [User::tableName().'.username' => SORT_ASC],
+                    'desc' => [User::tableName().'.username' => SORT_DESC],
                 ],
             ]
         ]);
@@ -91,9 +134,25 @@ class GoodsAttributeNameSearch extends GoodsAttributeName
             'updated_by' => $this->updated_by,
         ]);
 
+        //created time search
+        if(isset($params['create_from_date']) && isset($params['create_to_date']) && $params['create_from_date'] && $params['create_to_date']){
+            $this->create_from_date = $params['create_from_date'];
+            $this->create_to_date = $params['create_to_date'];
+            $query->andFilterWhere(['between', GoodsCategory::tableName().'.created_at', strtotime($this->create_from_date), strtotime($this->create_to_date)]);
+        }
+
+        //updated time search
+        if(isset($params['updated_from_date']) && isset($params['updated_to_date']) && $params['updated_from_date'] && $params['updated_to_date']){
+            $this->updated_from_date = $params['updated_from_date'];
+            $this->updated_to_date = $params['updated_to_date'];
+            $query->andFilterWhere(['between', GoodsCategory::tableName().'.updated_at', strtotime($this->updated_from_date), strtotime($this->updated_to_date)]);
+        }
+
         $query->andFilterWhere(['like', self::tableName().'.name', $this->name])
             ->andFilterWhere(['like', 'remark', $this->remark]);
         $query->andFilterWhere(['like', GoodsCategory::tableName().'.name', $this->category_search]);
+        $query->andFilterWhere(['like', User::tableName().'.username', $this->created_person]);
+        $query->andFilterWhere(['like', User::tableName().'.username', $this->updated_person]);
 
         return $dataProvider;
     }

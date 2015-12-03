@@ -84,6 +84,7 @@ class GoodsCategorySearch extends GoodsCategory
 
         $dataProvider->setSort([
             'attributes' => [
+                'id',
                 'parent_id',
                 'name',
                 'ico_path',

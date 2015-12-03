@@ -90,6 +90,8 @@ class GoodsAttributeName extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('model-goods-attribute-name', 'Updated At'),
             'updated_by' => Yii::t('model-goods-attribute-name', 'Updated By'),
             'category_search' => Yii::t('model-goods-attribute-name', 'Category Search'),
+            'created_person' => Yii::t('model-goods-attribute-name', 'Create Person'),
+            'updated_person' => Yii::t('model-goods-attribute-name', 'Updated Person'),
         ];
     }
 
