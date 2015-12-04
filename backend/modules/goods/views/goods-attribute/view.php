@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\DetailView;
+// use yii\widgets\DetailView;
+use common\widgets\DetailView4Col as DetailView;
 use yii\grid\GridView;
 use common\models\GoodsAttributeValue;
 

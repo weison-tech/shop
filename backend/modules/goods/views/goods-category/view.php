@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+// use yii\widgets\DetailView;
+use common\widgets\DetailView4Col as DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\GoodsCategory */
@@ -33,11 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>$model->parent ? $model->parent->name : '-',
             ],
             'name',
-            [
-                'attribute'=>'ico',
-                'value'=>$model->ico_path ? $model->ico_base_url."/".$model->ico_path : '-',
-                'format' => [$model->ico_path ? 'image' : 'text', ['width'=>'100','height'=>'100']],
-            ],
             'sort',
             'remark',
             [
@@ -59,6 +55,11 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'status',
                 'value'=>$model::getStatusText($model->status),
+            ],
+            [
+                'attribute'=>'ico',
+                'value'=>$model->ico_path ? $model->ico_base_url."/".$model->ico_path : '-',
+                'format' => [$model->ico_path ? 'image' : 'text', ['width'=>'100','height'=>'100']],
             ],
         ],
     ]) ?>

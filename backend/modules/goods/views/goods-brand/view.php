@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+// use yii\widgets\DetailView;
+use common\widgets\DetailView4Col as DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\GoodsBrand */
@@ -34,11 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>$model->category ? $model->category->name : '-',
             ],
             'name',
-            [
-                'attribute'=>'logo',
-                'value'=>$model->logo_base_url."/".$model->logo_path,
-                'format' => ['image',['width'=>'100','height'=>'100']],
-            ],
             'sort',
             'description',
             [
@@ -60,6 +56,11 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'status',
                 'value'=>$model::getStatusText($model->status),
+            ],
+            [
+                'attribute'=>'logo',
+                'value'=>$model->logo_base_url."/".$model->logo_path,
+                'format' => ['image',['width'=>'100','height'=>'100']],
             ],
         ],
     ]) ?>
