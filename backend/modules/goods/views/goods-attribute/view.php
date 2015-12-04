@@ -78,13 +78,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('goods-attribute', 'Create Goods Attribute Value'), ['create-value?name_id='.$model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('goods-brand', 'Batch Delete'), 'javascript:void(0);', ['class' => 'btn btn-danger', 'id' => 'batchDelete']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'yii\grid\CheckboxColumn'],
 
             'id',
             'name',
@@ -123,3 +124,42 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 </div>
+
+
+<?php
+$urlBatchDelete = \yii\helpers\Url::to(['/goods/goods-attribute/batch-delete-value?id='.$_GET['id']]);
+$message = Yii::t('common','Are you sure to batch delete?');
+$confirmBtn = Yii::t('common','Ok');
+$cancleBtn = Yii::t('common','Cancle');
+$js = <<<JS
+jQuery(document).ready(function() {
+
+    $("#batchDelete").click(function() {
+        bootbox.confirm(
+            {
+                message: "{$message}",
+                buttons: {
+                    confirm: {
+                        label: "{$confirmBtn}"
+                    },
+                    cancel: {
+                        label: "{$cancleBtn}"
+                    }
+                },
+                callback: function (confirmed) {
+                    if (confirmed) {
+                        var keys = $(".grid-view").yiiGridView("getSelectedRows");
+                        $.ajax({
+                            type: "POST",
+                            url: "{$urlBatchDelete}",
+                            dataType: "json",
+                            data: {ids: keys}
+                        });
+                    }
+                }
+            }
+        );
+    });
+});
+JS;
+$this->registerJs($js, \yii\web\View::POS_END);

@@ -160,8 +160,14 @@ class GoodsAttributeController extends Controller
     {
         $model = new GoodsAttributeValue();
         $model->attribute_name_id = $_GET['name_id'];
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->attribute_name_id]);
+        $params = Yii::$app->request->post();
+        if ($model->load($params) && $model->save()) {
+            if(isset($params['createMore']) && $params['createMore']){ //create and continure open create form
+                Yii::$app->session->setFlash('create_success',Yii::t('goods-attribute', 'Attribute value has been created.'));
+                return $this->redirect(['create-value', 'name_id' => $model->attribute_name_id]);
+            }else{
+                return $this->redirect(['view', 'id' => $model->attribute_name_id]);
+            }
         } else {
             return $this->render('create-value', [
                 'model' => $model,
@@ -206,6 +212,26 @@ class GoodsAttributeController extends Controller
         $model->status = GoodsAttributeValue::STATUS_DELETED;
         $model->save();
         return $this->redirect(['view?id='.$attribute_name_id]);
+    }
+
+    /**
+     * Batch delete existing GoodsAttributeName models.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionBatchDeleteValue()
+    {
+        $ids = Yii::$app->request->post('ids');
+        if (is_array($ids)) {
+            foreach ($ids as $id) {
+                $model = $this->findValueModel($id);
+                $model->status = GoodsAttributeValue::STATUS_DELETED;
+                $model->save();
+            }
+        }
+
+        return $this->redirect(['view?id='.$_GET['id']]);
     }
 
     /**

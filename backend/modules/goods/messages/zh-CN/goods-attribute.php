@@ -31,4 +31,6 @@ return [
     'Attribute : ' => '属性 ：',
     'Goods Attribute value list' => '属性值列表',
     'Update Goods Attribute Value: ' => '修改属性值',
+    'Attribute value has been created.' => '属性值创建成功',
+    'Create and coninue' => '创建并继续',
 ];

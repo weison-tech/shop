@@ -101,7 +101,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <?php
-$urlBatchDelete = \yii\helpers\Url::to(['/goods/goods-attribute-name/batch-delete']);
+$urlBatchDelete = \yii\helpers\Url::to(['/goods/goods-attribute/batch-delete']);
 $message = Yii::t('common','Are you sure to batch delete?');
 $confirmBtn = Yii::t('common','Ok');
 $cancleBtn = Yii::t('common','Cancle');

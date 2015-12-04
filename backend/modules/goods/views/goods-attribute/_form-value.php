@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use trntv\filekit\widget\Upload;
 use common\models\GoodsAttributeValue;
+use yii\bootstrap\Alert;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\GoodsAttributeValue */
@@ -11,6 +12,18 @@ use common\models\GoodsAttributeValue;
 ?>
 
 <div class="goods-attribute-value-form">
+
+    <?php
+        if(Yii::$app->session->hasFlash('create_success')){
+            Alert::begin([
+            'options' => [
+            'class' => 'alert-success',
+            ],
+            ]);
+            echo Yii::$app->session->getFlash('create_success');
+            Alert::end();
+        }
+    ?>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -31,8 +44,21 @@ use common\models\GoodsAttributeValue;
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('goods-attribute', 'Create') : Yii::t('goods-attribute', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?php if($model->isNewRecord){?>
+            <input id="createMore" name="createMore" type="hidden" />
+            <?= Html::submitButton(Yii::t('goods-attribute', 'Create and coninue'), ['class' => 'btn btn-primary','onclick'=>'return continueCreate()']) ?>
+        <?php } ?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php
+$js = <<<JS
+    function continueCreate(){
+        $("#createMore").val("true");
+        return true;
+    }
+JS;
+$this->registerJs($js, \yii\web\View::POS_END);
