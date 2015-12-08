@@ -43,6 +43,19 @@ return [
                 'application/json' => 'yii\web\JsonParser',
             ],
         ],
+        'response' => [
+            'class' => 'yii\web\Response',
+            'on beforeSend' => function ($event) {
+                $response = $event->sender;
+                //错误格式重定义
+                if(!$response->data['code']){
+                    $response->data = [
+                        'code' => $response->data['status'] ? : $response->data['code'],
+                        'msg' => $response->data['message'],
+                    ];
+                }
+            },
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'enableStrictParsing' => true,
