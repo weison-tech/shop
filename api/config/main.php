@@ -47,7 +47,8 @@ return [
             'class' => 'yii\web\Response',
             'on beforeSend' => function ($event) {
                 $response = $event->sender;
-                //错误格式重定义
+                //redeclare the format of error response
+                //except 404 error
                 if($response->statusCode != 200 && $response->statusCode != 404){
                     $response->data = [
                         'code' => $response->statusCode,
