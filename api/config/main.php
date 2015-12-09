@@ -48,10 +48,10 @@ return [
             'on beforeSend' => function ($event) {
                 $response = $event->sender;
                 //错误格式重定义
-                if(!$response->data['code']){
+                if($response->statusCode != 200 && $response->statusCode != 404){
                     $response->data = [
-                        'code' => $response->data['status'] ? : $response->data['code'],
-                        'msg' => $response->data['message'],
+                        'code' => $response->statusCode,
+                        'msg' => $response->statusText,
                     ];
                 }
             },
