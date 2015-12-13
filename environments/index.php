@@ -33,9 +33,8 @@ return [
             'backend/web/assets',
             'frontend/runtime',
             'frontend/web/assets',
-            'wechat/runtime',
-            'wechat/web/assets',
-            'api/runtime',
+            'store/runtime',
+            'store/web/assets',
         ],
         'setExecutable' => [
             'yii',
@@ -43,7 +42,7 @@ return [
         'setCookieValidationKey' => [
             'backend/config/main-local.php',
             'frontend/config/main-local.php',
-            'wechat/config/main-local.php',
+            'store/config/main-local.php',
         ],
     ],
     'Production' => [
@@ -53,9 +52,8 @@ return [
             'backend/web/assets',
             'frontend/runtime',
             'frontend/web/assets',
-            'wechat/runtime',
-            'wechat/web/assets',
-            'api/runtime',
+            'store/runtime',
+            'store/web/assets',
         ],
         'setExecutable' => [
             'yii',
@@ -63,7 +61,7 @@ return [
         'setCookieValidationKey' => [
             'backend/config/main-local.php',
             'frontend/config/main-local.php',
-            'wechat/config/main-local.php',
+            'store/config/main-local.php',
         ],
     ],
 ];
