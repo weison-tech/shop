@@ -20,7 +20,6 @@ return [
 	'Category ID' => '所属分类',
     'Name' => '品牌名',
     'Logo' => '品牌LOGO',
-    'Logo Base Url' => '',
     'Sort' => '排序',
     'Description' => '描述',
     'Status' => '状态',

@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute'=>'logo',
-                'value'=>$model->logo_base_url."/".$model->logo_path,
+                'value'=>\Yii::$app->fileStorage->baseUrl."/".$model->logo_path,
                 'format' => ['image',['width'=>'100','height'=>'100']],
             ],
         ],

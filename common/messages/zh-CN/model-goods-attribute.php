@@ -20,7 +20,6 @@ return [
 	'Category ID' => '所属分类',
     'Name' => '属性名',
     'Is Sku Attribute' => '是否SKU属性',
-    'Logo Base Url' => '',
     'Remark' => '备注',
     'Created At' => '创建时间',
     'Created By' => '创建人',

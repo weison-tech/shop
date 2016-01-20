@@ -12,7 +12,6 @@ class m151125_094026_create_goods_attribute_value extends Migration
             'attribute_name_id' => 'INT(11) UNSIGNED NOT NULL COMMENT "属性名id"',
             'name' => 'VARCHAR(30) NOT NULL COMMENT "属性值"',
             'ico_path' => 'VARCHAR(128) NULL DEFAULT "" COMMENT "ICO路径"',
-            'ico_base_url' => 'VARCHAR(128) NULL DEFAULT "" COMMENT "ICO图片基础URL"',
             'sort' => 'TINYINT(4) NOT NULL DEFAULT "0" COMMENT "排序"',
             'status' => 'TINYINT(4) NOT NULL DEFAULT "0" COMMENT "状态 0 不启用 1 启用 2 删除"',
             'created_at' => 'INT(11) UNSIGNED NOT NULL DEFAULT "0" COMMENT "创建时间"',

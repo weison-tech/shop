@@ -51,7 +51,7 @@ class GoodsCategory extends \yii\db\ActiveRecord
             [['parent_id', 'sort', 'created_at', 'created_by', 'updated_at', 'updated_by', 'status'], 'integer'],
             [['name','sort'], 'required'],
             [['name'], 'string', 'max' => 64],
-            [['ico_path', 'ico_base_url', 'remark'], 'string', 'max' => 128],
+            [['ico_path', 'remark'], 'string', 'max' => 128],
             [['ico'], 'safe'],
         ];
     }
@@ -74,7 +74,7 @@ class GoodsCategory extends \yii\db\ActiveRecord
                 'class' => UploadBehavior::className(),
                 'attribute' => 'ico',
                 'pathAttribute' => 'ico_path',
-                'baseUrlAttribute' => 'ico_base_url'
+                'baseUrlAttribute' => false,
             ]
         ];
     }

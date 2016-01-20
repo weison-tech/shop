@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute'=>'ico',
-                'value'=>$model->ico_path ? $model->ico_base_url."/".$model->ico_path : '-',
+                'value'=>$model->ico_path ? \Yii::$app->fileStorage->baseUrl."/".$model->ico_path : '-',
                 'format' => [$model->ico_path ? 'image' : 'text', ['width'=>'100','height'=>'100']],
             ],
         ],

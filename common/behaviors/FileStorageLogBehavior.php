@@ -34,7 +34,6 @@ class FileStorageLogBehavior extends Behavior
         $model = new FileStorageItem();
         $model->component = $this->component;
         $model->path = $file->getPath();
-        $model->base_url = $this->getStorage()->baseUrl;
         $model->size = $file->getSize();
         $model->type = $file->getMimeType();
         $model->name = pathinfo($file->getPath(), PATHINFO_FILENAME);

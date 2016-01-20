@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'logo_path',
                 'content'=>function($model){
-                    return Html::img($model->logo_base_url."/".$model->logo_path,['style'=>'width:100px;height:100px;']);
+                    return Html::img(\Yii::$app->fileStorage->baseUrl."/".$model->logo_path,['style'=>'width:100px;height:100px;']);
                 },
             ],
             'name',

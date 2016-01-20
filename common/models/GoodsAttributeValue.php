@@ -15,7 +15,6 @@ use common\models\GoodsAttributeName;
  * @property string $attribute_name_id
  * @property string $name
  * @property string $ico_path
- * @property string $ico_base_url
  * @property integer $sort
  * @property integer $status
  * @property string $created_at
@@ -63,7 +62,7 @@ class GoodsAttributeValue extends \yii\db\ActiveRecord
                 'class' => UploadBehavior::className(),
                 'attribute' => 'ico',
                 'pathAttribute' => 'ico_path',
-                'baseUrlAttribute' => 'ico_base_url'
+                'baseUrlAttribute' => false,
             ]
         ];
     }
@@ -77,7 +76,7 @@ class GoodsAttributeValue extends \yii\db\ActiveRecord
             [['attribute_name_id', 'name', 'sort'], 'required'],
             [['attribute_name_id', 'sort', 'status', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 30],
-            [['ico_path', 'ico_base_url'], 'string', 'max' => 128],
+            [['ico_path'], 'string', 'max' => 128],
             [['ico'], 'safe'],
         ];
     }
@@ -93,7 +92,6 @@ class GoodsAttributeValue extends \yii\db\ActiveRecord
             'name' => Yii::t('model-goods-attribute', 'Attribute Value'),
             'ico' => Yii::t('model-goods-attribute', 'Ico Path'),
             'ico_path' => Yii::t('model-goods-attribute', 'Ico Path'),
-            'ico_base_url' => Yii::t('model-goods-attribute', 'Ico Base Url'),
             'sort' => Yii::t('model-goods-attribute', 'Sort'),
             'status' => Yii::t('model-goods-attribute', 'Status'),
             'created_at' => Yii::t('model-goods-attribute', 'Created At'),

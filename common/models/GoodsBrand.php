@@ -51,7 +51,7 @@ class GoodsBrand extends \yii\db\ActiveRecord
             [['category_id', 'name', 'logo', 'sort'], 'required'],
             [['category_id', 'sort', 'status', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 32],
-            [['logo_path','logo_base_url'], 'string', 'max' => 128],
+            [['logo_path'], 'string', 'max' => 128],
             [['description'], 'string', 'max' => 255],
             [['logo'], 'safe'],
         ];
@@ -75,7 +75,7 @@ class GoodsBrand extends \yii\db\ActiveRecord
                 'class' => UploadBehavior::className(),
                 'attribute' => 'logo',
                 'pathAttribute' => 'logo_path',
-                'baseUrlAttribute' => 'logo_base_url'
+                'baseUrlAttribute' => false
             ]
         ];
     }
@@ -91,7 +91,6 @@ class GoodsBrand extends \yii\db\ActiveRecord
             'name' => Yii::t('model-goods-brand', 'Name'),
             'logo' => Yii::t('model-goods-brand', 'Logo'),
             'logo_path' => Yii::t('model-goods-brand', 'Logo'),
-            'logo_base_url' => Yii::t('model-goods-brand', 'Logo Base Url'),
             'sort' => Yii::t('model-goods-brand', 'Sort'),
             'description' => Yii::t('model-goods-brand', 'Description'),
             'status' => Yii::t('model-goods-brand', 'Status'),
