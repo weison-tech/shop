@@ -17,7 +17,6 @@ use yii\behaviors\TimestampBehavior;
  * @property string $title
  * @property string $body
  * @property string $view
- * @property string $thumbnail_base_url
  * @property string $thumbnail_path
  * @property array $attachments
  * @property integer $author_id
@@ -88,7 +87,7 @@ class Article extends \yii\db\ActiveRecord
                 'multiple' => true,
                 'uploadRelation' => 'articleAttachments',
                 'pathAttribute' => 'path',
-                'baseUrlAttribute' => 'base_url',
+                'baseUrlAttribute' => false,
                 'orderAttribute' => 'order',
                 'typeAttribute' => 'type',
                 'sizeAttribute' => 'size',
@@ -98,7 +97,7 @@ class Article extends \yii\db\ActiveRecord
                 'class' => UploadBehavior::className(),
                 'attribute' => 'thumbnail',
                 'pathAttribute' => 'thumbnail_path',
-                'baseUrlAttribute' => 'thumbnail_base_url'
+                'baseUrlAttribute' => false,
             ]
         ];
     }
@@ -116,7 +115,7 @@ class Article extends \yii\db\ActiveRecord
             [['published_at'], 'filter', 'filter' => 'strtotime'],
             [['category_id'], 'exist', 'targetClass' => ArticleCategory::className(), 'targetAttribute'=>'id'],
             [['author_id', 'updater_id', 'status'], 'integer'],
-            [['slug', 'thumbnail_base_url', 'thumbnail_path'], 'string', 'max' => 1024],
+            [['slug', 'thumbnail_path'], 'string', 'max' => 1024],
             [['title'], 'string', 'max' => 512],
             [['view'], 'string', 'max' => 255],
             [['attachments', 'thumbnail'], 'safe']

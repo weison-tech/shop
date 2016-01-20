@@ -51,7 +51,7 @@ class ArticleAttachment extends \yii\db\ActiveRecord
         return [
             [['article_id', 'path'], 'required'],
             [['article_id', 'size', 'order'], 'integer'],
-            [['base_url', 'path', 'type', 'name'], 'string', 'max' => 255]
+            [['path', 'type', 'name'], 'string', 'max' => 255]
         ];
     }
 
@@ -63,7 +63,6 @@ class ArticleAttachment extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('common', 'ID'),
             'article_id' => Yii::t('common', 'Article ID'),
-            'base_url' => Yii::t('common', 'Base Url'),
             'path' => Yii::t('common', 'Path'),
             'size' => Yii::t('common', 'Size'),
             'order' => Yii::t('common', 'Order'),
