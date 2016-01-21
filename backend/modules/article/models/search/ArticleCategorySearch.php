@@ -19,7 +19,7 @@ class ArticleCategorySearch extends ArticleCategory
     {
         return [
             [['id', 'status'], 'integer'],
-            [['slug', 'title'], 'safe'],
+            [['slug', 'title', 'parent_id'], 'safe'],
         ];
     }
 
@@ -38,7 +38,7 @@ class ArticleCategorySearch extends ArticleCategory
      */
     public function search($params)
     {
-        $query = ArticleCategory::find();
+        $query = ArticleCategory::find()->where(['<>','status',ArticleCategory::STATUS_DELETED]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -51,6 +51,7 @@ class ArticleCategorySearch extends ArticleCategory
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
+            'parent_id' => $this->parent_id,
         ]);
 
         $query->andFilterWhere(['like', 'slug', $this->slug])

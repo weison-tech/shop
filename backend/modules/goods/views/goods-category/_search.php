@@ -28,7 +28,7 @@ use common\models\GoodsCategory;
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
             <?= $form->field($model, 'parent_id')->dropDownList(ArrayHelper::map(GoodsCategory::get(0, GoodsCategory::find()->where(['status'=>GoodsCategory::STATUS_ENABLED])->asArray()->all()), 'id', 'label'),
-                    ['class' => 'form-control', 'prompt' => Yii::t('goods-category', 'Please Filter')]) ?>
+                    ['class' => 'form-control', 'prompt' => Yii::t('common', 'Please Filter')]) ?>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
             <?= $form->field($model, 'status')->dropdownList(GoodsCategory::getStatusArr()) ?>

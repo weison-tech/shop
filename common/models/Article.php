@@ -34,8 +34,12 @@ use yii\behaviors\TimestampBehavior;
  */
 class Article extends \yii\db\ActiveRecord
 {
-    const STATUS_PUBLISHED = 1;
-    const STATUS_DRAFT = 0;
+    /**
+     * 文章状态常量
+     */
+    const STATUS_ENABLED = 1; //有效
+    const STATUS_DELETED = 2; //删除
+    const STATUS_DISABLED = 0; //无效
 
     /**
      * @var array

@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
+use common\models\ArticleCategory;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ArticleCategory */
@@ -19,9 +21,9 @@ use yii\bootstrap\ActiveForm;
         ->hint(Yii::t('backend', 'If you\'ll leave this field empty, slug will be generated automatically'))
         ->textInput(['maxlength' => 1024]) ?>
 
-    <?php echo $form->field($model, 'parent_id')->dropDownList($categories, ['prompt'=>'']) ?>
+    <?= $form->field($model, 'parent_id')->dropDownList(ArrayHelper::map(ArticleCategory::get(0, ArticleCategory::find()->where(['status'=>ArticleCategory::STATUS_ENABLED])->asArray()->all()), 'id', 'label'),['class' => 'form-control', 'prompt' => Yii::t('common', 'Please Filter')]) ?>
 
-    <?php echo $form->field($model, 'status')->checkbox() ?>
+    <?= $form->field($model, 'status')->dropdownList(ArticleCategory::getStatusArr()) ?>
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

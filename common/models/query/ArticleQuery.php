@@ -15,7 +15,7 @@ class ArticleQuery extends ActiveQuery
 {
     public function published()
     {
-        $this->andWhere(['status' => Article::STATUS_PUBLISHED]);
+        $this->andWhere(['status' => Article::STATUS_ENABLED]);
         $this->andWhere(['<', '{{%article}}.published_at', time()]);
         return $this;
     }

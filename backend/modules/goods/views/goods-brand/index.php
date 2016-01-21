@@ -20,8 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('goods-brand', 'Create Goods Brand'), ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('goods-brand', 'Batch Delete'), 'javascript:void(0);', ['class' => 'btn btn-danger', 'id' => 'batchDelete']) ?>
-        <?= Html::a(Yii::t('goods-brand', Yii::t('common','Advanced Search')), 'javascript:void(0);', ['class' => 'btn btn-info', 'id' => 'search']) ?>
+        <?= Html::a(Yii::t('common', 'Batch Delete'), 'javascript:void(0);', ['class' => 'btn btn-danger', 'id' => 'batchDelete']) ?>
+        <?= Html::a(Yii::t('common','Advanced Search'), 'javascript:void(0);', ['class' => 'btn btn-info', 'id' => 'search']) ?>
     </p>
 
     <?= GridView::widget([
@@ -99,7 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <?php
-$urlBatchDelete = \yii\helpers\Url::to(['/goods/goods-brand/batch-delete']);
+$urlBatchDelete = \yii\helpers\Url::to(['batch-delete']);
 $message = Yii::t('common','Are you sure to batch delete?');
 $confirmBtn = Yii::t('common','Ok');
 $cancleBtn = Yii::t('common','Cancle');

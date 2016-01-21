@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('goods-attribute', 'Create Goods Attribute Value'), ['create-value?name_id='.$model->id], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('goods-brand', 'Batch Delete'), 'javascript:void(0);', ['class' => 'btn btn-danger', 'id' => 'batchDelete']) ?>
+        <?= Html::a(Yii::t('common', 'Batch Delete'), 'javascript:void(0);', ['class' => 'btn btn-danger', 'id' => 'batchDelete']) ?>
     </p>
 
     <?= GridView::widget([
@@ -128,7 +128,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <?php
-$urlBatchDelete = \yii\helpers\Url::to(['/goods/goods-attribute/batch-delete-value?id='.$_GET['id']]);
+$urlBatchDelete = \yii\helpers\Url::to(['batch-delete-value?id='.$_GET['id']]);
 $message = Yii::t('common','Are you sure to batch delete?');
 $confirmBtn = Yii::t('common','Ok');
 $cancleBtn = Yii::t('common','Cancle');

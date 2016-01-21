@@ -50,8 +50,10 @@ return [
 	'Search' => '搜索',
 	'Reset' => '重置',
 	'Advanced Search' => '高级搜索',
+	'Batch Delete' => '批量删除',
 	'Created Time' => '创建时间',
 	'Updated Time' => '修改时间',
 	'Created Person' => '创建人',
 	'Updated Person' => '修改人',
+	'Please Filter' => '请选择',
 ];

@@ -18,7 +18,7 @@ class ArticleCategoryQuery extends ActiveQuery
      */
     public function active()
     {
-        $this->andWhere(['status' => ArticleCategory::STATUS_ACTIVE]);
+        $this->andWhere(['status' => ArticleCategory::STATUS_ENABLED]);
 
         return $this;
     }
