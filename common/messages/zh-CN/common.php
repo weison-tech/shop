@@ -32,6 +32,7 @@ return [
 	'Published' => '发布',
 	'Published At' => '发布时间',
 	'Created At' => '创建时间',
+	'Updated At' => '修改时间',
 	'Article View' => '文章预览次数',
 	'Body' => '内容',
 	'Thumbnail' => '略缩图',

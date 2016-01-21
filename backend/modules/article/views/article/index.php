@@ -27,7 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\CheckboxColumn'],
             'id',
-            'slug',
+            [
+                'attribute' => 'thumbnail_path',
+                'content'=>function($model){
+                    return Html::img(\Yii::$app->fileStorage->baseUrl."/".$model->thumbnail_path,['style'=>'width:100px;height:100px;']);
+                },
+            ],
             'title',
             [
                 'attribute'=>'category_id',

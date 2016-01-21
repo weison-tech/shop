@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use trntv\filekit\widget\Upload;
 use common\models\GoodsAttributeValue;
 use yii\bootstrap\Alert;
+use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\GoodsAttributeValue */
@@ -34,6 +35,7 @@ use yii\bootstrap\Alert;
         Upload::className(),
         [
             'url' => ['upload'],
+            'acceptFileTypes' => new JsExpression('/(\.|\/)(gif|jpe?g|png)$/i'),
             'maxFileSize' => 5000000, // 5 MiB
         ]);
     ?>

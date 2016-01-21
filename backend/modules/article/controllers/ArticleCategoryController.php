@@ -67,7 +67,7 @@ class ArticleCategoryController extends Controller
         $categories = ArrayHelper::map($categories, 'id', 'title');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -91,7 +91,7 @@ class ArticleCategoryController extends Controller
 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

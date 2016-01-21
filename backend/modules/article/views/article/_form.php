@@ -4,6 +4,7 @@ use trntv\filekit\widget\Upload;
 use kartik\datetime\DateTimePicker;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
@@ -53,6 +54,7 @@ use yii\bootstrap\ActiveForm;
         Upload::className(),
         [
             'url' => ['upload'],
+            'acceptFileTypes' => new JsExpression('/(\.|\/)(gif|jpe?g|png)$/i'),
             'maxFileSize' => 5000000, // 5 MiB
         ]);
     ?>
@@ -62,7 +64,7 @@ use yii\bootstrap\ActiveForm;
         Upload::className(),
         [
             'url' => ['upload'],
-            'sortable' => true,
+            'sortable' => false,
             'maxFileSize' => 10000000, // 10 MiB
             'maxNumberOfFiles' => 10
         ]);

@@ -5,6 +5,8 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use common\models\GoodsCategory;
 use trntv\filekit\widget\Upload;
+use yii\web\JsExpression;
+
 /* @var $this yii\web\View */
 /* @var $model common\models\GoodsCategory */
 /* @var $form yii\widgets\ActiveForm */
@@ -23,6 +25,7 @@ use trntv\filekit\widget\Upload;
         Upload::className(),
         [
             'url' => ['upload'],
+            'acceptFileTypes' => new JsExpression('/(\.|\/)(gif|jpe?g|png)$/i'),
             'maxFileSize' => 5000000, // 5 MiB
         ]);
     ?>

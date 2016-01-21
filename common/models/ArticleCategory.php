@@ -80,7 +80,9 @@ class ArticleCategory extends \yii\db\ActiveRecord
             'slug' => Yii::t('common', 'Slug'),
             'title' => Yii::t('common', 'Title'),
             'parent_id' => Yii::t('common', 'Parent Category'),
-            'status' => Yii::t('common', 'Active')
+            'status' => Yii::t('common', 'Active'),
+            'created_at' => Yii::t('common', 'Created At'),
+            'updated_at' => Yii::t('common', 'Updated At'),
         ];
     }
 
